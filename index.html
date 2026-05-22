@@ -202,6 +202,16 @@
         .chat-bubble-wrapper.me .like-trigger-btn { left: -8px; right: auto; }
         .like-trigger-btn.liked { color: #ef4444; background: #ffe4e6; }
         
+        /* CHAT RØD SKILLELINJE STYLE */
+        .chat-unread-divider {
+            display: flex; align-items: center; text-align: center; color: #f87171; font-size: 10px; font-weight: 800; letter-spacing: 1px; margin: 10px 0; width: 100%;
+        }
+        .chat-unread-divider::before, .chat-unread-divider::after {
+            content: ''; flex: 1; border-bottom: 1.5px solid rgba(248, 113, 113, 0.4);
+        }
+        .chat-unread-divider:not(:empty)::before { margin-right: .5em; }
+        .chat-unread-divider:not(:empty)::after { margin-left: .5em; }
+
         .chat-input-bar { display: flex; padding: 10px; background: #1e293b; border-top: 1px solid rgba(255,255,255,0.05); gap: 10px; align-items: center; }
         .chat-text-input { flex-grow: 1; padding: 10px 14px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 20px; font-size: 13px; }
         .chat-send-btn { background: #047857; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; }
@@ -244,11 +254,11 @@
         .hourly-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #e2e8f0; }
         .hourly-row:last-child { border-bottom: none; }
 
-        /* --- NY LUKSUS DIALOG BOKS TIL LOG UD --- */
+        /* NY LUKSUS DIALOG BOKS TIL LOG UD & VELKOMMEN */
         .logout-modal {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px);
-            z-index: 200; display: none; justify-content: center; align-items: center; padding: 24px;
+            z-index: 200; display: flex; justify-content: center; align-items: center; padding: 24px;
         }
         .logout-card {
             background-color: #1e293b; border: 1px solid rgba(255,255,255,0.08);
@@ -261,6 +271,10 @@
         .logout-actions { display: flex; gap: 12px; }
         .logout-btn-confirm { flex: 1; padding: 12px; background-color: #ef4444; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; }
         .logout-btn-cancel { flex: 1; padding: 12px; background-color: rgba(255,255,255,0.08); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; }
+        
+        /* SPECIFIK STYLE TIL VELKOMMEN BOX */
+        .welcome-card-icon { color: #10b981 !important; }
+        .logout-btn-welcome { flex: 1; padding: 14px; background: linear-gradient(135deg, #047857, #065f46); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(4,120,87,0.3); }
 
         /* ADMIN BOXES */
         .admin-box { background-color: #1e293b; border: 2px solid #2dd4bf; border-radius: 16px; padding: 16px; color: white; margin-top: 20px; display: none; }
@@ -280,7 +294,7 @@
 
     <div class="phone-container">
         
-        <div id="logoutModal" class="logout-modal">
+        <div id="logoutModal" class="logout-modal" style="display: none;">
             <div class="logout-card">
                 <span class="material-icons">power_settings_new</span>
                 <h3>Log ud</h3>
@@ -288,6 +302,17 @@
                 <div class="logout-actions">
                     <button class="logout-btn-cancel" onclick="toggleLogoutModal(false)">Annuller</button>
                     <button class="logout-btn-confirm" onclick="confirmFirebaseLogout()">Log ud</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="welcomeModal" class="logout-modal" style="display: none;">
+            <div class="logout-card">
+                <span class="material-icons welcome-card-icon">emoji_events</span>
+                <h3>Profil oprettet!</h3>
+                <p id="welcomeModalText">Velkommen på turen!</p>
+                <div class="logout-actions">
+                    <button class="logout-btn-welcome" onclick="closeWelcomeModal()">KOM I GANG 🏸</button>
                 </div>
             </div>
         </div>
@@ -569,11 +594,17 @@
                     userCredential.user.updateProfile({
                         displayName: name
                     }).then(() => {
-                        alert("Velkommen på turen, " + name + "! Din profil er oprettet.");
-                        location.reload();
+                        // SÅDAN KASPER! Den grimme hvide popup er nu skiftet ud med vores luksus boks
+                        document.getElementById('welcomeModalText').innerHTML = `Velkommen på turen, <b>${name}</b>! Din profil er nu oprettet i skyen.`;
+                        document.getElementById('welcomeModal').style.display = 'flex';
                     });
                 })
                 .catch(err => alert("Kunne ikke oprette profil: " + err.message));
+        }
+
+        function closeWelcomeModal() {
+            document.getElementById('welcomeModal').style.display = 'none';
+            location.reload();
         }
 
         function executeFirebaseLogin() {
@@ -585,7 +616,6 @@
                 .catch(err => alert("Fejl i login: " + err.message));
         }
 
-        // --- NYE MODAL BASEREDE LOG UD FUNKTIONER ---
         function toggleLogoutModal(show) {
             document.getElementById('logoutModal').style.display = show ? 'flex' : 'none';
         }
@@ -617,16 +647,28 @@
         // --- 4. NAVIGATION ---
         function navigateTo(pageId) {
             if(!auth.currentUser && pageId !== 'login') return;
+            
+            // Hvis brugeren forlader chat-siden, gemmer vi tidsstemplet for HVORNÅR de gik ud!
+            if (isChatActivePage && pageId !== 'chatPage') {
+                localStorage.setItem('chat_last_read_timestamp', Date.now());
+            }
+
             document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
             document.getElementById(`backBtn`).style.display = pageId === 'dashboard' ? 'none' : 'block';
             document.getElementById(`page-${pageId}`).classList.add('active');
+            
             isChatActivePage = (pageId === 'chatPage');
             
             if (pageId === 'dashboard') { document.getElementById(`mainTitle`).innerHTML = "BADMINTON TOURS"; document.getElementById('chatBadge').style.display = 'none'; }
             if (pageId === 'logistics') document.getElementById(`mainTitle`).innerHTML = "MIN REJSE";
             if (pageId === 'schedulePage') document.getElementById(`mainTitle`).innerHTML = "DAGSPLAN";
             if (pageId === 'chatPage') {
-                document.getElementById('mainTitle').innerHTML = "GRUPPE-CHAT"; document.getElementById('chatBadge').style.display = 'none';
+                document.getElementById('mainTitle').innerHTML = "GRUPPE-CHAT"; 
+                document.getElementById('chatBadge').style.display = 'none';
+                
+                // Vi tvinger chatten til at opdatere med det samme, så den røde linje renderes korrekt
+                database.ref('chat_messages').limitToLast(50).once('value', (snapshot) => { renderChatMessages(snapshot.val()); });
+                
                 setTimeout(() => { const box = document.getElementById('chatMessagesBox'); box.scrollTop = box.scrollHeight; }, 100);
             }
             if (pageId === 'culturePage') document.getElementById(`mainTitle`).innerHTML = "KULTUR-GUIDE";
@@ -724,7 +766,7 @@
             database.ref('chat_messages').push({
                 sender: displaySender,
                 text: text,
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                timestamp: firebase.database.ServerValue.TIMESTAMP, // Dette er Firebases indbyggede ur!
                 likes: {}
             });
             input.value = "";
@@ -737,19 +779,37 @@
             let myName = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "";
             myName = myName.charAt(0).toUpperCase() + myName.slice(1);
 
+            // Vi henter tidspunktet for, hvornår brugeren sidst kiggede i chatten
+            const lastRead = parseInt(localStorage.getItem('chat_last_read_timestamp')) || 0;
+            let dividerInserted = false;
+
             if (!isChatActivePage && document.getElementById('page-dashboard').classList.contains('active')) {
                 document.getElementById('chatBadge').style.display = 'block'; document.getElementById('chatBadge').innerHTML = "Ny";
             }
 
             Object.keys(data).forEach(key => {
                 const msg = data[key]; const isMe = (msg.sender === myName);
+                
+                // Hvis beskeden er nyere end vores 'lastRead' tidspunkt, og vi ikke har sat stregen endnu, så smid den ind nu!
+                if (!isMe && msg.timestamp > lastRead && !dividerInserted && isChatActivePage) {
+                    html += `<div class="chat-unread-divider">NYE BESKEDER</div>`;
+                    dividerInserted = true;
+                }
+
                 let likeArray = []; if(msg.likes) { Object.keys(msg.likes).forEach(lKey => { if(msg.likes[lKey]) likeArray.push(lKey); }); }
                 let likeText = ""; if (likeArray.length > 0) likeText = `<div class="like-row">❤️ Liket af ${likeArray.join(", ")}</div>`;
                 const iHaveLiked = likeArray.includes(myName);
 
                 html += `<div class="chat-bubble-wrapper ${isMe ? 'me' : 'other'}"><div class="chat-sender-name">${msg.sender}</div><div class="chat-bubble">${msg.text}<button class="like-trigger-btn ${iHaveLiked ? 'liked' : ''}" onclick="toggleLikeMessage('${key}', '${myName}', ${iHaveLiked})"><span class="material-icons" style="font-size:12px;">favorite</span></button></div>${likeText}</div>`;
             });
-            box.innerHTML = html; setTimeout(() => { box.scrollTop = box.scrollHeight; }, 50);
+            box.innerHTML = html; 
+            
+            // Hvis man ER inde i chatten, opdaterer vi løbende tidsstemplet, så linjen rykker sig til næste besøg
+            if (isChatActivePage) {
+                localStorage.setItem('chat_last_read_timestamp', Date.now());
+            }
+            
+            setTimeout(() => { box.scrollTop = box.scrollHeight; }, 50);
         }
         function toggleLikeMessage(msgId, myName, alreadyLiked) { if(alreadyLiked) { database.ref(`chat_messages/${msgId}/likes/${myName}`).remove(); } else { database.ref(`chat_messages/${msgId}/likes/${myName}`).set(true); } }
 
