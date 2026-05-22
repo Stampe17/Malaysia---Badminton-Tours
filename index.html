@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Malaysian Way - Live Master App</title>
     
-    <link rel="apple-touch-icon" href="app-icon.jpg">
+    <link class="js-meta-icon" rel="apple-touch-icon" href="app-icon.jpg">
     <link rel="icon" type="image/jpeg" href="app-icon.jpg">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -42,11 +42,16 @@
             border-radius: 40px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             border: 12px solid #222;
-            overflow-y: auto;
+            overflow: hidden; /* Vigtigt for fastlåst chat-visning */
             position: relative;
         }
 
-        .phone-container::-webkit-scrollbar { display: none; }
+        /* SCROLL BAR APPLIKERES KUN PÅ INDHOLDET NU */
+        .scrollable-content {
+            height: calc(100% - 78px);
+            overflow-y: auto;
+        }
+        .scrollable-content::-webkit-scrollbar { display: none; }
 
         /* LOGIN & SIGNUP SKÆRM STYLE */
         .login-screen {
@@ -57,6 +62,7 @@
             height: 100%;
             color: white;
             text-align: center;
+            overflow-y: auto;
         }
         .login-logo { font-size: 50px; color: #ff9800; margin-bottom: 10px; }
         .login-title { font-size: 24px; font-weight: 800; margin-bottom: 6px; letter-spacing: 1px; }
@@ -69,20 +75,20 @@
         .toggle-auth-mode-text { font-size: 13px; color: #cbd5e1; margin-top: 20px; cursor: pointer; font-weight: 600; text-decoration: underline; }
         .toggle-auth-mode-text:hover { color: #ffb74d; }
 
-        /* TOPBAR */
+        /* TOPBAR (LÅST FAST I TOPPEN) */
         .app-bar {
-            background-color: rgba(13, 35, 60, 0.85);
+            background-color: rgba(13, 35, 60, 0.95);
             backdrop-filter: blur(10px);
             color: white;
             padding: 45px 16px 16px 16px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            height: 78px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 110;
         }
 
         .app-bar h1 { font-size: 15px; font-weight: 800; letter-spacing: 2px; flex-grow: 1; color: #ffffff; }
@@ -91,7 +97,7 @@
         .content { padding: 18px; }
 
         /* APP SIDER */
-        .app-page { display: none; }
+        .app-page { display: none; height: 100%; }
         .app-page.active { display: block; }
 
         /* BRANDING */
@@ -128,7 +134,7 @@
         .menu-card p { font-size: 12px; font-weight: 700; color: #ffffff; }
         .badge { display: none; position: absolute; top: 12px; right: 12px; background-color: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 3px 7px; border-radius: 50%; }
 
-        /* CARDS & DANSKE KAMPE LIVE MODUL */
+        /* CARDS & LIVE SCORE MODUL */
         .info-card { background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(10px); padding: 18px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.05); color: white; }
         .sub-section-title { font-size: 12px; font-weight: 800; color: #ffb74d; margin-top: 14px; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 4px; letter-spacing: 1px; }
 
@@ -185,9 +191,24 @@
         .selector-btn.active { background: #047857; border-color: #047857; }
         .mdac-button { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-top: 10px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); }
 
-        /* CHAT */
-        .chat-container { display: flex; flex-direction: column; height: 600px; background: rgba(15, 23, 42, 0.6); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
-        .chat-messages-box { flex-grow: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        /* --- CHAT-VISNING RETTET TIL FAST LÅST APP-BAR --- */
+        .chat-layout {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.4);
+        }
+        .chat-messages-box { 
+            flex-grow: 1; 
+            padding: 16px 14px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px;
+            scroll-behavior: auto; /* Deaktiver smooth scroll lige under hop, så det ikke blinker */
+        }
+        .chat-messages-box::-webkit-scrollbar { display: none; }
+        
         .chat-bubble-wrapper { display: flex; flex-direction: column; max-width: 75%; width: fit-content; }
         .chat-bubble-wrapper.me { align-self: flex-end; }
         .chat-bubble-wrapper.other { align-self: flex-start; }
@@ -204,17 +225,17 @@
         
         /* CHAT RØD SKILLELINJE STYLE */
         .chat-unread-divider {
-            display: flex; align-items: center; text-align: center; color: #f87171; font-size: 10px; font-weight: 800; letter-spacing: 1px; margin: 10px 0; width: 100%;
+            display: flex; align-items: center; text-align: center; color: #f87171; font-size: 10px; font-weight: 800; letter-spacing: 1px; margin: 15px 0; width: 100%; scroll-margin-top: 20px;
         }
         .chat-unread-divider::before, .chat-unread-divider::after {
-            content: ''; flex: 1; border-bottom: 1.5px solid rgba(248, 113, 113, 0.4);
+            content: ''; flex: 1; border-bottom: 2px solid #ef4444; opacity: 0.6;
         }
-        .chat-unread-divider:not(:empty)::before { margin-right: .5em; }
-        .chat-unread-divider:not(:empty)::after { margin-left: .5em; }
+        .chat-unread-divider:not(:empty)::before { margin-right: 1em; }
+        .chat-unread-divider:not(:empty)::after { margin-left: 1em; }
 
-        .chat-input-bar { display: flex; padding: 10px; background: #1e293b; border-top: 1px solid rgba(255,255,255,0.05); gap: 10px; align-items: center; }
-        .chat-text-input { flex-grow: 1; padding: 10px 14px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 20px; font-size: 13px; }
-        .chat-send-btn { background: #047857; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+        .chat-input-bar { display: flex; padding: 12px 14px 24px 14px; background: #1e293b; border-top: 1px solid rgba(255,255,255,0.05); gap: 10px; align-items: center; z-index: 10; }
+        .chat-text-input { flex-grow: 1; padding: 12px 16px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 20px; font-size: 13px; }
+        .chat-send-btn { background: #047857; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; shrink: 0; }
 
         /* KULTUR-GUIDE */
         .culture-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 20px; }
@@ -235,7 +256,7 @@
         .weather-modal { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background-color: rgba(10, 23, 18, 0.98); backdrop-filter: blur(20px);
-            z-index: 100; padding: 45px 18px; display: none; color: white; flex-direction: column; 
+            z-index: 150; padding: 45px 18px; display: none; color: white; flex-direction: column; 
         }
         .weather-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px; }
         .weather-header h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
@@ -254,7 +275,7 @@
         .hourly-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #e2e8f0; }
         .hourly-row:last-child { border-bottom: none; }
 
-        /* NY LUKSUS DIALOG BOKS TIL LOG UD & VELKOMMEN */
+        /* MODAL POPUPS */
         .logout-modal {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px);
@@ -272,7 +293,6 @@
         .logout-btn-confirm { flex: 1; padding: 12px; background-color: #ef4444; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; }
         .logout-btn-cancel { flex: 1; padding: 12px; background-color: rgba(255,255,255,0.08); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; }
         
-        /* SPECIFIK STYLE TIL VELKOMMEN BOX */
         .welcome-card-icon { color: #10b981 !important; }
         .logout-btn-welcome { flex: 1; padding: 14px; background: linear-gradient(135deg, #047857, #065f46); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(4,120,87,0.3); }
 
@@ -317,6 +337,12 @@
             </div>
         </div>
 
+        <div id="appTopbar" class="app-bar" style="display: none;">
+            <button id="backBtn" class="back-btn" onclick="navigateTo('dashboard')"><span class="material-icons">arrow_back</span></button>
+            <h1 id="mainTitle">BADMINTON TOURS</h1>
+            <button class="logout-btn" onclick="toggleLogoutModal(true)"><span class="material-icons">logout</span></button>
+        </div>
+
         <div id="page-login" class="login-screen app-page active">
             <span class="material-icons login-logo">sports_tennis</span>
             <div id="authPanelTitle" class="login-title">BADMINTON TOURS</div>
@@ -350,167 +376,164 @@
             <div id="weatherRowsContainer"></div>
             <p style="text-align: center; margin-top: auto; padding-top: 15px; font-size: 12px; color: #475569; font-weight: 600;">Husk masser af vand til hallen! 🏸</p>
         </div>
-        
-        <div id="appTopbar" class="app-bar" style="display: none;">
-            <button id="backBtn" class="back-btn" onclick="navigateTo('dashboard')"><span class="material-icons">arrow_back</span></button>
-            <h1 id="mainTitle">BADMINTON TOURS</h1>
-            <button class="logout-btn" onclick="toggleLogoutModal(true)"><span class="material-icons">logout</span></button>
-        </div>
 
-        <div id="page-dashboard" class="content app-page">
-            <div class="welcome-title">THE MALAYSIAN WAY</div>
-            
-            <div class="location-info" onclick="toggleWeather(true)">
-                <span class="material-icons" style="font-size: 16px;">location_on</span>
-                <span id="currentWeatherText">Kuala Lumpur • Henter...</span>
-            </div>
+        <div id="appContentContainer" class="scrollable-content">
 
-            <div class="activity-card">
-                <div class="icon-circle"><span class="material-icons">sports_tennis</span></div>
-                <div class="activity-info">
-                    <h3 id="dashboard-next-subtitle">NÆSTE AKTIVITET PÅ PROGRAMMET</h3>
-                    <h2 id="dashboard-next-title">Henter program...</h2>
-                    <p id="dashboard-next-time"></p>
+            <div id="page-dashboard" class="content app-page">
+                <div class="welcome-title">THE MALAYSIAN WAY</div>
+                
+                <div class="location-info" onclick="toggleWeather(true)">
+                    <span class="material-icons" style="font-size: 16px;">location_on</span>
+                    <span id="currentWeatherText">Kuala Lumpur • Henter...</span>
                 </div>
-            </div>
 
-            <div class="section-title">HURTIG ADGANG</div>
-            <div class="menu-grid">
-                <div class="menu-card" onclick="navigateTo('logistics')"><span class="material-icons" style="color: #ff9800;">flight_takeoff</span><p>MIN REJSE</p></div>
-                <div class="menu-card" onclick="navigateTo('schedulePage')"><span class="material-icons" style="color: #10b981;">calendar_month</span><p>DAGSPLAN</p></div>
-                <div class="menu-card" onclick="navigateTo('culturePage')"><span class="material-icons" style="color: #a855f7;">museum</span><p>KULTUR-GUIDE</p></div>
-                <div class="menu-card" onclick="navigateTo('chatPage')"><span class="material-icons" style="color: #06b6d4;">chat_bubble</span><p>GRUPPE-CHAT</p><div id="chatBadge" class="badge">0</div></div>
-            </div>
-
-            <div class="section-title">PETRONAS MALAYSIA OPEN 2026</div>
-            <div class="info-card livescore-wrapper">
-                <div class="livescore-card" onclick="document.getElementById('danishMatchesAccordion').classList.toggle('open')">
-                    <div>
-                        <div style="font-size: 11px; color:#ffb74d; font-weight:800; letter-spacing:1px; margin-bottom: 2px;">DANSKE KAMPE</div>
-                        <div id="score-p1-name" class="player-name">Henter kampe...</div>
-                        <div id="score-p2-name" class="player-name opponent">Følg med live</div>
+                <div class="activity-card">
+                    <div class="icon-circle"><span class="material-icons">sports_tennis</span></div>
+                    <div class="activity-info">
+                        <h3 id="dashboard-next-subtitle">NÆSTE AKTIVITET PÅ PROGRAMMET</h3>
+                        <h2 id="dashboard-next-title">Henter program...</h2>
+                        <p id="dashboard-next-time"></p>
                     </div>
-                    <div>
-                        <div id="score-current-points" class="score-box">
-                            Se alle <span class="material-icons" style="font-size:12px;">expand_more</span>
+                </div>
+
+                <div class="section-title">HURTIG ADGANG</div>
+                <div class="menu-grid">
+                    <div class="menu-card" onclick="navigateTo('logistics')"><span class="material-icons" style="color: #ff9800;">flight_takeoff</span><p>MIN REJSE</p></div>
+                    <div class="menu-card" onclick="navigateTo('schedulePage')"><span class="material-icons" style="color: #10b981;">calendar_month</span><p>DAGSPLAN</p></div>
+                    <div class="menu-card" onclick="navigateTo('culturePage')"><span class="material-icons" style="color: #a855f7;">museum</span><p>KULTUR-GUIDE</p></div>
+                    <div class="menu-card" onclick="navigateTo('chatPage')"><span class="material-icons" style="color: #06b6d4;">chat_bubble</span><p>GRUPPE-CHAT</p><div id="chatBadge" class="badge">0</div></div>
+                </div>
+
+                <div class="section-title">PETRONAS MALAYSIA OPEN 2026</div>
+                <div class="info-card livescore-wrapper">
+                    <div class="livescore-card" onclick="document.getElementById('danishMatchesAccordion').classList.toggle('open')">
+                        <div>
+                            <div style="font-size: 11px; color:#ffb74d; font-weight:800; letter-spacing:1px; margin-bottom: 2px;">DANSKE KAMPE</div>
+                            <div id="score-p1-name" class="player-name">Henter kampe...</div>
+                            <div id="score-p2-name" class="player-name opponent">Følg med live</div>
+                        </div>
+                        <div>
+                            <div id="score-current-points" class="score-box">
+                                Se alle <span class="material-icons" style="font-size:12px;">expand_more</span>
+                            </div>
                         </div>
                     </div>
+
+                    <div id="danishMatchesAccordion" class="danish-matches-list"></div>
+
+                    <div class="livescore-links">
+                        <a href="https://bwfworldtour.bwfbadminton.com/tournament/5227/petronas-malaysia-open-2026/overview" target="_blank" class="bwf-link-btn">
+                            <span class="material-icons" style="font-size:12px;">emoji_events</span> BWF Turnering
+                        </a>
+                        <a href="https://match-centre.bwfbadminton.com/5227" target="_blank" class="bwf-link-btn">
+                            <span class="material-icons" style="font-size:12px;">analytics</span> Live Score ⚡
+                        </a>
+                    </div>
                 </div>
 
-                <div id="danishMatchesAccordion" class="danish-matches-list"></div>
-
-                <div class="livescore-links">
-                    <a href="https://bwfworldtour.bwfbadminton.com/tournament/5227/petronas-malaysia-open-2026/overview" target="_blank" class="bwf-link-btn">
-                        <span class="material-icons" style="font-size:12px;">emoji_events</span> BWF Turnering
-                    </a>
-                    <a href="https://match-centre.bwfbadminton.com/5227" target="_blank" class="bwf-link-btn">
-                        <span class="material-icons" style="font-size:12px;">analytics</span> Live Score ⚡
-                    </a>
+                <div id="adminLiveScoreTrigger" style="text-align: center; margin-top: 15px; display: none;">
+                    <button onclick="checkAdminPassword('livescore')" style="background:none; border:none; color:rgba(255,255,255,0.15); font-size:10px; cursor:pointer;">⚡ Opdater Kampe (Kasper)</button>
                 </div>
-            </div>
-
-            <div id="adminLiveScoreTrigger" style="text-align: center; margin-top: 15px; display: none;">
-                <button onclick="checkAdminPassword('livescore')" style="background:none; border:none; color:rgba(255,255,255,0.15); font-size:10px; cursor:pointer;">⚡ Opdater Kampe (Kasper)</button>
-            </div>
-            <div id="adminPanelLivescore" class="admin-box">
-                <h3><span class="material-icons">sports_tennis</span> Danske Kampe Planlægger</h3>
-                <div class="admin-field">
-                    <label>FULDE DANSKE PROGRAM</label>
-                    <textarea id="input-raw-matches" placeholder="F.eks:
+                <div id="adminPanelLivescore" class="admin-box">
+                    <h3><span class="material-icons">sports_tennis</span> Danske Kampe Planlægger</h3>
+                    <div class="admin-field">
+                        <label>FULDE DANSKE PROGRAM</label>
+                        <textarea id="input-raw-matches" placeholder="F.eks:
 @ Fredag (Kvartfinaler)
 09:15 - V. Axelsen vs K. Naraoka"></textarea>
+                    </div>
+                    <button class="admin-save-btn" onclick="saveLiveScoreData()">GEM PROGRAM TIL SKYEN</button>
                 </div>
-                <button class="admin-save-btn" onclick="saveLiveScoreData()">GEM PROGRAM TIL SKYEN</button>
             </div>
+
+            <div id="page-logistics" class="content app-page">
+                <div class="welcome-title" style="font-size: 20px; margin-bottom: 12px;">Rejseinformation</div>
+                <p style="color: #aaa; font-size: 11px; margin-bottom: 6px; font-weight: bold;">SKIFT VISNING MELLEM HOLDENE:</p>
+                <div class="user-type-selector">
+                    <button id="btnGroupA" class="selector-btn active" onclick="switchUserGroup('A')">Hold A (CPH)</button>
+                    <button id="btnGroupB" class="selector-btn" onclick="switchUserGroup('B')">Hold B (BLL)</button>
+                </div>
+                <a href="https://imigresen-online.imi.gov.my/mdac/main" target="_blank" class="mdac-button"><span class="material-icons">assignment_turned_in</span> Udfyld MDAC</a>
+                <div class="section-title">FLY- OG LOGISTIKDETALJER</div>
+                <div class="info-card">
+                    <div class="sub-section-title">✈️ UDREJSE</div>
+                    <div class="logistics-item"> <span class="material-icons logistics-icon">flight_takeoff</span> <div> <div class="logistics-label">FLY 1 (AFGANG DANMARK)</div> <div id="display-fly1-ud" class="logistics-value"></div> </div> </div>
+                    <div class="logistics-item"> <span class="material-icons logistics-icon">airline_stops</span> <div> <div class="logistics-label">FLY 2 (MELLEMLANDING)</div> <div id="display-fly2-ud" class="logistics-value"></div> </div> </div>
+                    <div class="logistics-item"> <span class="material-icons logistics-icon">schedule</span> <div> <div class="logistics-label">MØDETID & STED I LUFTHAVN</div> <div id="display-modetid" class="logistics-value"></div> </div> </div>
+                    <div class="sub-section-title">✈️ HJEMREJSE</div>
+                    <div class="logistics-item"> <span class="material-icons logistics-icon">flight_takeoff</span> <div> <div class="logistics-label">FLY 1 (AFGANG MALAYSIA)</div> <div id="display-fly1-hjem" class="logistics-value"></div> </div> </div>
+                    <div class="logistics-item"> <span class="material-icons logistics-icon">airline_stops</span> <div> <div class="logistics-label">FLY 2 (MELLEMLANDING)</div> <div id="display-fly2-hjem" class="logistics-value"></div> </div> </div>
+                    <div class="sub-section-title">💼 INFO</div>
+                    <div class="logistics-item"> <span class="material-icons logistics-icon">luggage</span> <div> <div class="logistics-label">BAGAGE</div> <div id="display-bagage" class="logistics-value"></div> </div> </div>
+                    <div class="logistics-item"> <span class="material-icons logistics-icon">hotel</span> <div> <div class="logistics-label">HOTELADRESSE</div> <div id="display-hotel" class="logistics-value"></div> </div> </div>
+                </div>
+                <div id="adminLogisticsTrigger" class="leader-trigger" style="display: none;"><button onclick="checkAdminPassword('logistics')">🔒 Rejseleder Konsol</button></div>
+                <div id="adminPanelLogistics" class="admin-box">
+                    <h3><span class="material-icons">security</span> Fly & Info Dashboard</h3>
+                    <select id="adminGroupSelect" class="admin-group-select" onchange="loadAdminFormGroup()">
+                        <option value="A">Hold A (København)</option> <option value="B">Hold B (Billund)</option>
+                    </select>
+                    <div class="admin-field"><label>FLY 1 - UDREJSE</label><input type="text" id="input-fly1-ud"></div>
+                    <div class="admin-field"><label>FLY 2 - UDREJSE MELLEMLANDING</label><input type="text" id="input-fly2-ud"></div>
+                    <div class="admin-field"><label>MØDETID & STED I LUFTHAVN</label><input type="text" id="input-modetid"></div>
+                    <div class="admin-field"><label>FLY 1 - HJEMREJSE</label><input type="text" id="input-fly1-hjem"></div>
+                    <div class="admin-field"><label>FLY 2 - HJEMREJSE MELLEMLANDING</label><input type="text" id="input-fly2-hjem"></div>
+                    <div class="admin-field"><label>BAGAGE</label><input type="text" id="input-bagage"></div>
+                    <div class="admin-field"><label>HOTELADRESSE</label><input type="text" id="input-hotel"></div>
+                    <button class="admin-save-btn" onclick="saveLogisticsData()">GEM DATABASEN</button>
+                </div>
+            </div>
+
+            <div id="page-schedulePage" class="content app-page">
+                <div class="welcome-title" style="font-size: 20px; margin-bottom: 4px;">Hele Turplanen</div>
+                <div id="accordionContainer">Henter master-planen fra skyen...</div>
+                <div id="adminScheduleTrigger" class="leader-trigger" style="margin-top: 40px; display: none;"><button onclick="checkAdminPassword('schedule')">🔒 Rediger Dagsplan</button></div>
+                <div id="adminPanelSchedule" class="admin-box">
+                    <h3><span class="material-icons">edit_calendar</span> Master Planlægger</h3>
+                    <div class="admin-field"><label>PROGRAM (BRUG @ FOR NY DAG)</label><textarea id="input-raw-schedule"></textarea></div>
+                    <button class="admin-save-btn" onclick="saveScheduleData()">OPDATER LIVE MASTER PROGRAM</button>
+                </div>
+            </div>
+
+            <div id="page-culturePage" class="content app-page">
+                <div class="welcome-title" style="font-size: 20px; margin-bottom: 4px;">Kultur & Byguide</div>
+                <div class="culture-tabs">
+                    <button id="tab-MAD" class="tab-btn active" onclick="switchCultureTab('MAD')">MAD 🍜</button>
+                    <button id="tab-SHOPPING" class="tab-btn" onclick="switchCultureTab('SHOPPING')">SHOPPING 🛍️</button>
+                    <button id="tab-SIGHTSEEING" class="tab-btn" onclick="switchCultureTab('SIGHTSEEING')">SIGHTS 🐒</button>
+                    <button id="tab-ANDET" class="tab-btn" onclick="switchCultureTab('ANDET')">ANDET ✨</button>
+                </div>
+                <div id="cultureCardsContainer"></div>
+                <div id="adminCultureTrigger" class="leader-trigger" style="margin-top: 30px; display: none;"><button onclick="checkAdminPassword('culture')">🔒 Tilføj Nyt Sted</button></div>
+                <div id="adminPanelCulture" class="admin-box">
+                    <h3><span class="material-icons">add_location_alt</span> Tilføj Anbefaling</h3>
+                    <div class="admin-field">
+                        <select id="input-cult-category" class="admin-group-select">
+                            <option value="MAD">MAD 🍜</option> <option value="SHOPPING">SHOPPING 🛍️</option> <option value="SIGHTSEEING">SIGHTSEEING 🐒</option> <option value="ANDET">ANDET ✨</option>
+                        </select>
+                    </div>
+                    <div class="admin-field"><label>NAVN PÅ STEDET</label><input type="text" id="input-cult-name"></div>
+                    <div class="admin-field"><label>WEBADRESSE (LINK)</label><input type="text" id="input-cult-url"></div>
+                    <div class="admin-field"><label>ADRESSE (GOOGLE MAPS VENLIG)</label><input type="text" id="input-cult-address"></div>
+                    <div class="admin-field"><label>BESKRIVELSE</label><textarea id="input-cult-desc"></textarea></div>
+                    <div class="admin-field">
+                        <label>UPLOAD BILLEDE AF STEDET</label>
+                        <label for="input-cult-file" class="custom-file-upload"><span id="file-upload-status-text">Vælg billede</span></label>
+                        <input type="file" id="input-cult-file" accept="image/*" style="display:none;" onchange="handleImageUploadConversion(this)">
+                    </div>
+                    <button class="admin-save-btn" onclick="saveCultureData()">GEM ANBEFALING TIL SKYEN</button>
+                </div>
+            </div>
+
         </div>
 
-        <div id="page-logistics" class="content app-page">
-            <div class="welcome-title" style="font-size: 20px; margin-bottom: 12px;">Rejseinformation</div>
-            <p style="color: #aaa; font-size: 11px; margin-bottom: 6px; font-weight: bold;">SKIFT VISNING MELLEM HOLDENE:</p>
-            <div class="user-type-selector">
-                <button id="btnGroupA" class="selector-btn active" onclick="switchUserGroup('A')">Hold A (CPH)</button>
-                <button id="btnGroupB" class="selector-btn" onclick="switchUserGroup('B')">Hold B (BLL)</button>
-            </div>
-            <a href="https://imigresen-online.imi.gov.my/mdac/main" target="_blank" class="mdac-button"><span class="material-icons">assignment_turned_in</span> Udfyld MDAC</a>
-            <div class="section-title">FLY- OG LOGISTIKDETALJER</div>
-            <div class="info-card">
-                <div class="sub-section-title">✈️ UDREJSE</div>
-                <div class="logistics-item"> <span class="material-icons logistics-icon">flight_takeoff</span> <div> <div class="logistics-label">FLY 1 (AFGANG DANMARK)</div> <div id="display-fly1-ud" class="logistics-value"></div> </div> </div>
-                <div class="logistics-item"> <span class="material-icons logistics-icon">airline_stops</span> <div> <div class="logistics-label">FLY 2 (MELLEMLANDING)</div> <div id="display-fly2-ud" class="logistics-value"></div> </div> </div>
-                <div class="logistics-item"> <span class="material-icons logistics-icon">schedule</span> <div> <div class="logistics-label">MØDETID & STED I LUFTHAVN</div> <div id="display-modetid" class="logistics-value"></div> </div> </div>
-                <div class="sub-section-title">✈️ HJEMREJSE</div>
-                <div class="logistics-item"> <span class="material-icons logistics-icon">flight_takeoff</span> <div> <div class="logistics-label">FLY 1 (AFGANG MALAYSIA)</div> <div id="display-fly1-hjem" class="logistics-value"></div> </div> </div>
-                <div class="logistics-item"> <span class="material-icons logistics-icon">airline_stops</span> <div> <div class="logistics-label">FLY 2 (MELLEMLANDING)</div> <div id="display-fly2-hjem" class="logistics-value"></div> </div> </div>
-                <div class="sub-section-title">💼 INFO</div>
-                <div class="logistics-item"> <span class="material-icons logistics-icon">luggage</span> <div> <div class="logistics-label">BAGAGE</div> <div id="display-bagage" class="logistics-value"></div> </div> </div>
-                <div class="logistics-item"> <span class="material-icons logistics-icon">hotel</span> <div> <div class="logistics-label">HOTELADRESSE</div> <div id="display-hotel" class="logistics-value"></div> </div> </div>
-            </div>
-            <div id="adminLogisticsTrigger" class="leader-trigger" style="display: none;"><button onclick="checkAdminPassword('logistics')">🔒 Rejseleder Konsol</button></div>
-            <div id="adminPanelLogistics" class="admin-box">
-                <h3><span class="material-icons">security</span> Fly & Info Dashboard</h3>
-                <select id="adminGroupSelect" class="admin-group-select" onchange="loadAdminFormGroup()">
-                    <option value="A">Hold A (København)</option> <option value="B">Hold B (Billund)</option>
-                </select>
-                <div class="admin-field"><label>FLY 1 - UDREJSE</label><input type="text" id="input-fly1-ud"></div>
-                <div class="admin-field"><label>FLY 2 - UDREJSE MELLEMLANDING</label><input type="text" id="input-fly2-ud"></div>
-                <div class="admin-field"><label>MØDETID & STED I LUFTHAVN</label><input type="text" id="input-modetid"></div>
-                <div class="admin-field"><label>FLY 1 - HJEMREJSE</label><input type="text" id="input-fly1-hjem"></div>
-                <div class="admin-field"><label>FLY 2 - HJEMREJSE MELLEMLANDING</label><input type="text" id="input-fly2-hjem"></div>
-                <div class="admin-field"><label>BAGAGE</label><input type="text" id="input-bagage"></div>
-                <div class="admin-field"><label>HOTELADRESSE</label><input type="text" id="input-hotel"></div>
-                <button class="admin-save-btn" onclick="saveLogisticsData()">GEM DATABASEN</button>
-            </div>
-        </div>
-
-        <div id="page-schedulePage" class="content app-page">
-            <div class="welcome-title" style="font-size: 20px; margin-bottom: 4px;">Hele Turplanen</div>
-            <div id="accordionContainer">Henter master-planen fra skyen...</div>
-            <div id="adminScheduleTrigger" class="leader-trigger" style="margin-top: 40px; display: none;"><button onclick="checkAdminPassword('schedule')">🔒 Rediger Dagsplan</button></div>
-            <div id="adminPanelSchedule" class="admin-box">
-                <h3><span class="material-icons">edit_calendar</span> Master Planlægger</h3>
-                <div class="admin-field"><label>PROGRAM (BRUG @ FOR NY DAG)</label><textarea id="input-raw-schedule"></textarea></div>
-                <button class="admin-save-btn" onclick="saveScheduleData()">OPDATER LIVE MASTER PROGRAM</button>
-            </div>
-        </div>
-
-        <div id="page-chatPage" class="content app-page">
-            <div class="welcome-title" style="font-size: 20px; margin-bottom: 4px;">Camp Chatten</div>
-            <div class="chat-container">
+        <div id="page-chatPage" class="app-page" style="height: calc(100% - 78px);">
+            <div class="chat-layout">
                 <div id="chatMessagesBox" class="chat-messages-box"></div>
                 <div class="chat-input-bar">
                     <input type="text" id="chatInput" class="chat-text-input" placeholder="Skriv en fællesbesked..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
                     <button class="chat-send-btn" onclick="sendChatMessage()"><span class="material-icons">send</span></button>
                 </div>
-            </div>
-        </div>
-
-        <div id="page-culturePage" class="content app-page">
-            <div class="welcome-title" style="font-size: 20px; margin-bottom: 4px;">Kultur & Byguide</div>
-            <div class="culture-tabs">
-                <button id="tab-MAD" class="tab-btn active" onclick="switchCultureTab('MAD')">MAD 🍜</button>
-                <button id="tab-SHOPPING" class="tab-btn" onclick="switchCultureTab('SHOPPING')">SHOPPING 🛍️</button>
-                <button id="tab-SIGHTSEEING" class="tab-btn" onclick="switchCultureTab('SIGHTSEEING')">SIGHTS 🐒</button>
-                <button id="tab-ANDET" class="tab-btn" onclick="switchCultureTab('ANDET')">ANDET ✨</button>
-            </div>
-            <div id="cultureCardsContainer"></div>
-            <div id="adminCultureTrigger" class="leader-trigger" style="margin-top: 30px; display: none;"><button onclick="checkAdminPassword('culture')">🔒 Tilføj Nyt Sted</button></div>
-            <div id="adminPanelCulture" class="admin-box">
-                <h3><span class="material-icons">add_location_alt</span> Tilføj Anbefaling</h3>
-                <div class="admin-field">
-                    <select id="input-cult-category" class="admin-group-select">
-                        <option value="MAD">MAD 🍜</option> <option value="SHOPPING">SHOPPING 🛍️</option> <option value="SIGHTSEEING">SIGHTSEEING 🐒</option> <option value="ANDET">ANDET ✨</option>
-                    </select>
-                </div>
-                <div class="admin-field"><label>NAVN PÅ STEDET</label><input type="text" id="input-cult-name"></div>
-                <div class="admin-field"><label>WEBADRESSE (LINK)</label><input type="text" id="input-cult-url"></div>
-                <div class="admin-field"><label>ADRESSE (GOOGLE MAPS VENLIG)</label><input type="text" id="input-cult-address"></div>
-                <div class="admin-field"><label>BESKRIVELSE</label><textarea id="input-cult-desc"></textarea></div>
-                <div class="admin-field">
-                    <label>UPLOAD BILLEDE AF STEDET</label>
-                    <label for="input-cult-file" class="custom-file-upload"><span id="file-upload-status-text">Vælg billede</span></label>
-                    <input type="file" id="input-cult-file" accept="image/*" style="display:none;" onchange="handleImageUploadConversion(this)">
-                </div>
-                <button class="admin-save-btn" onclick="saveCultureData()">GEM ANBEFALING TIL SKYEN</button>
             </div>
         </div>
 
@@ -539,6 +562,7 @@
         let globalScheduleRawData = "";
         let isChatActivePage = false;
         let currentAuthMode = "LOGIN";
+        let lastMessageIdOnScreen = ""; // Gemmer det nyeste besked ID i databasen globalt
 
         // --- 2. SECURITY & AUTH SYSTEM ---
         auth.onAuthStateChanged((user) => {
@@ -594,7 +618,6 @@
                     userCredential.user.updateProfile({
                         displayName: name
                     }).then(() => {
-                        // SÅDAN KASPER! Den grimme hvide popup er nu skiftet ud med vores luksus boks
                         document.getElementById('welcomeModalText').innerHTML = `Velkommen på turen, <b>${name}</b>! Din profil er nu oprettet i skyen.`;
                         document.getElementById('welcomeModal').style.display = 'flex';
                     });
@@ -644,18 +667,29 @@
             database.ref('culture_guide').on('value', (snapshot) => { renderCultureCards(snapshot.val()); });
         }
 
-        // --- 4. NAVIGATION ---
+        // --- 4. NAVIGATION (MED FAST TOPBAR FIX) ---
         function navigateTo(pageId) {
             if(!auth.currentUser && pageId !== 'login') return;
             
-            // Hvis brugeren forlader chat-siden, gemmer vi tidsstemplet for HVORNÅR de gik ud!
-            if (isChatActivePage && pageId !== 'chatPage') {
-                localStorage.setItem('chat_last_read_timestamp', Date.now());
+            // Hvis man går UD af chatten, gemmer vi ID'et på den absolut nyeste besked, der findes på skærmen lige nu
+            if (isChatActivePage && pageId !== 'chatPage' && lastMessageIdOnScreen) {
+                localStorage.setItem('chat_last_read_message_id', lastMessageIdOnScreen);
             }
+
+            // Nulstil scroll position på hovedcontaineren så man ikke "arver" scroll fra andre sider
+            document.getElementById('appContentContainer').scrollTop = 0;
 
             document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
             document.getElementById(`backBtn`).style.display = pageId === 'dashboard' ? 'none' : 'block';
-            document.getElementById(`page-${pageId}`).classList.add('active');
+            
+            // Skift synlighed mellem chatten (udenfor container) og de andre sider (indenfor container)
+            if (pageId === 'chatPage') {
+                document.getElementById('appContentContainer').style.display = 'none';
+                document.getElementById('page-chatPage').classList.add('active');
+            } else {
+                document.getElementById('appContentContainer').style.display = 'block';
+                document.getElementById(`page-${pageId}`).classList.add('active');
+            }
             
             isChatActivePage = (pageId === 'chatPage');
             
@@ -666,10 +700,21 @@
                 document.getElementById('mainTitle').innerHTML = "GRUPPE-CHAT"; 
                 document.getElementById('chatBadge').style.display = 'none';
                 
-                // Vi tvinger chatten til at opdatere med det samme, så den røde linje renderes korrekt
-                database.ref('chat_messages').limitToLast(50).once('value', (snapshot) => { renderChatMessages(snapshot.val()); });
-                
-                setTimeout(() => { const box = document.getElementById('chatMessagesBox'); box.scrollTop = box.scrollHeight; }, 100);
+                // Hent og tegn beskederne, og kør vores smarte automatiske scroll-hop bagefter
+                database.ref('chat_messages').limitToLast(50).once('value', (snapshot) => { 
+                    renderChatMessages(snapshot.val()); 
+                    
+                    // KASPER-LOGIK: Hop direkte ned til vores røde linje ("Nye Beskeder") hvis den findes!
+                    setTimeout(() => {
+                        const unreadDividerElement = document.getElementById('unreadMarkerLine');
+                        const box = document.getElementById('chatMessagesBox');
+                        if (unreadDividerElement) {
+                            unreadDividerElement.scrollIntoView({ block: 'start', behavior: 'auto' });
+                        } else {
+                            box.scrollTop = box.scrollHeight;
+                        }
+                    }, 50);
+                });
             }
             if (pageId === 'culturePage') document.getElementById(`mainTitle`).innerHTML = "KULTUR-GUIDE";
         }
@@ -755,7 +800,7 @@
         }
         function resetNextActivity() { document.getElementById('dashboard-next-subtitle').innerHTML = "NÆSTE AKTIVITET"; document.getElementById('dashboard-next-title').innerHTML = "Ingen planlagte aktiviteter lige nu"; document.getElementById('dashboard-next-time').innerHTML = "Nyd fritiden! 🏸"; }
 
-        // --- 10. SKY CHAT ENGINE ---
+        // --- 10. SKY CHAT ENGINE (SKUDSIKKER ID-BASERET METODE) ---
         function sendChatMessage() {
             const input = document.getElementById('chatInput'); const text = input.value.trim(); if (text === "") return;
             const currentUser = auth.currentUser;
@@ -766,7 +811,7 @@
             database.ref('chat_messages').push({
                 sender: displaySender,
                 text: text,
-                timestamp: firebase.database.ServerValue.TIMESTAMP, // Dette er Firebases indbyggede ur!
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
                 likes: {}
             });
             input.value = "";
@@ -779,21 +824,33 @@
             let myName = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "";
             myName = myName.charAt(0).toUpperCase() + myName.slice(1);
 
-            // Vi henter tidspunktet for, hvornår brugeren sidst kiggede i chatten
-            const lastRead = parseInt(localStorage.getItem('chat_last_read_timestamp')) || 0;
+            // 100% RETTET KASPER LOGIK: Vi finder det gemte BESKED-ID i stedet for sekunder/tid!
+            const lastReadMessageId = localStorage.getItem('chat_last_read_message_id') || "";
             let dividerInserted = false;
+            let foundOldLastReadMessage = false;
 
             if (!isChatActivePage && document.getElementById('page-dashboard').classList.contains('active')) {
                 document.getElementById('chatBadge').style.display = 'block'; document.getElementById('chatBadge').innerHTML = "Ny";
             }
 
-            Object.keys(data).forEach(key => {
+            const messageKeys = Object.keys(data);
+            if (messageKeys.length > 0) {
+                // Vi holder øje med, hvad det absolut nyeste ID i databasen er lige nu
+                lastMessageIdOnScreen = messageKeys[messageKeys.length - 1];
+            }
+
+            messageKeys.forEach(key => {
                 const msg = data[key]; const isMe = (msg.sender === myName);
                 
-                // Hvis beskeden er nyere end vores 'lastRead' tidspunkt, og vi ikke har sat stregen endnu, så smid den ind nu!
-                if (!isMe && msg.timestamp > lastRead && !dividerInserted && isChatActivePage) {
-                    html += `<div class="chat-unread-divider">NYE BESKEDER</div>`;
+                // Hvis vi rammer en besked, der er NYERE end den besked, brugeren så sidst (og det ikke er deres egen)
+                if (foundOldLastReadMessage && !isMe && !dividerInserted && isChatActivePage && lastReadMessageId !== "") {
+                    html += `<div id="unreadMarkerLine" class="chat-unread-divider">NYE BESKEDER</div>`;
                     dividerInserted = true;
+                }
+
+                // Hvis vi møder den helt præcise besked, brugeren stoppede ved sidst, tænder vi for "triggeren"
+                if (key === lastReadMessageId) {
+                    foundOldLastReadMessage = true;
                 }
 
                 let likeArray = []; if(msg.likes) { Object.keys(msg.likes).forEach(lKey => { if(msg.likes[lKey]) likeArray.push(lKey); }); }
@@ -802,14 +859,18 @@
 
                 html += `<div class="chat-bubble-wrapper ${isMe ? 'me' : 'other'}"><div class="chat-sender-name">${msg.sender}</div><div class="chat-bubble">${msg.text}<button class="like-trigger-btn ${iHaveLiked ? 'liked' : ''}" onclick="toggleLikeMessage('${key}', '${myName}', ${iHaveLiked})"><span class="material-icons" style="font-size:12px;">favorite</span></button></div>${likeText}</div>`;
             });
+            
             box.innerHTML = html; 
             
-            // Hvis man ER inde i chatten, opdaterer vi løbende tidsstemplet, så linjen rykker sig til næste besøg
-            if (isChatActivePage) {
-                localStorage.setItem('chat_last_read_timestamp', Date.now());
+            // Hvis man står aktivt inde på chatsiden, opdaterer vi løbende, så man har læst det hele til næste besøg
+            if (isChatActivePage && lastMessageIdOnScreen) {
+                localStorage.setItem('chat_last_read_message_id', lastMessageIdOnScreen);
             }
             
-            setTimeout(() => { box.scrollTop = box.scrollHeight; }, 50);
+            // Normal scroll i bunden hvis der ikke er nogen rød linje markeret
+            if (!dividerInserted && !isChatActivePage) {
+                setTimeout(() => { box.scrollTop = box.scrollHeight; }, 50);
+            }
         }
         function toggleLikeMessage(msgId, myName, alreadyLiked) { if(alreadyLiked) { database.ref(`chat_messages/${msgId}/likes/${myName}`).remove(); } else { database.ref(`chat_messages/${msgId}/likes/${myName}`).set(true); } }
 
