@@ -148,9 +148,9 @@
         .important-num { background: #ff9800; color: #000; font-weight: 900; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; shrink: 0; font-size: 13px; }
         .important-text h4 { font-size: 14px; font-weight: 800; margin-bottom: 2px; color: #fff; }
         .important-text p { font-size: 12px; color: #cbd5e1; line-height: 1.4; }
-        .packing-accordion-btn { background: rgba(255,255,255,0.06); border: 1px dashed rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 8px; color: #2dd4bf; font-size: 11px; font-weight: bold; cursor: pointer; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; }
+        .packing-accordion-btn { background: rgba(255,255,255,0.06); border: 1px dashed rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 8px; color: #2dd4bf; font-size: 11px; font-weight: bold; cursor: pointer; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; border: none; }
         .packing-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding-left: 4px; }
-        .packing-content.open { max-height: 500px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; }
+        .packing-content.open { max-height: 1000px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; }
         .packing-section-title { font-size: 10px; font-weight: 900; color: #ffb74d; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; margin-top: 8px; }
         .packing-section-title:first-child { margin-top: 0; }
         .packing-list { font-size: 12px; color: #94a3b8; line-height: 1.5; padding-left: 14px; }
@@ -207,9 +207,6 @@
         .day-schedule-time { font-size: 13px; font-weight: 800; color: #ffb74d; width: 45px; shrink: 0; }
         .day-schedule-text { font-size: 13px; color: #e2e8f0; font-weight: 500; }
 
-        .user-type-selector { display: flex; gap: 10px; margin-bottom: 20px; }
-        .selector-btn { flex: 1; padding: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 700; }
-        .selector-btn.active { background: #047857; border-color: #047857; }
         .mdac-button { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-top: 10px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); }
 
         /* CHAT LAYOUT */
@@ -239,24 +236,27 @@
         .chat-text-input { flex-grow: 1; padding: 12px 16px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 20px; font-size: 13px; }
         .chat-send-btn { background: #047857; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; shrink: 0; }
 
-        /* KULTUR-GUIDE & APPROVAL BOX */
+        /* KULTUR-GUIDE & COMFORT-ZONE DESIGN */
         .culture-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 20px; }
         .tab-btn { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.05); color: #94a3b8; padding: 10px 4px; border-radius: 10px; font-size: 10px; font-weight: 800; cursor: pointer; text-align: center; }
         .tab-btn.active { background: #ff9800; color: #000; font-weight: 900; box-shadow: 0 4px 10px rgba(255,152,0,0.3); }
         
         .approval-alert-badge { background-color: #ef4444; color: white; font-size: 9px; padding: 2px 5px; border-radius: 10px; margin-left: 4px; font-weight: bold; }
         .admin-approval-card { background: rgba(239, 68, 68, 0.15); border: 2px dashed #ef4444; border-radius: 16px; padding: 14px; margin-bottom: 16px; color: white; }
-        
+        .admin-approval-card input, .admin-approval-card textarea { width: 100%; padding: 8px; background-color: #0f172a; border: 1px solid #ef4444; color: white; border-radius: 6px; font-size: 13px; margin-bottom: 8px; }
+        .admin-approval-card label { display: block; font-size: 10px; color: #f87171; font-weight: bold; margin-bottom: 2px; text-transform: uppercase; }
+
         .culture-card { background: rgba(30, 41, 59, 0.8); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); color: white; }
         .culture-card-img { height: 140px; background-size: cover; background-position: center; position: relative; background-color: #1e293b; }
-        .culture-card-body { padding: 14px; }
+        .culture-card-body { padding: 14px; position: relative; }
         .culture-name-link { font-size: 16px; font-weight: 800; color: #ffffff; text-decoration: none; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; width: fit-content; }
         .culture-name-link:hover { color: #ffb74d; text-decoration: underline; }
         .culture-maps-link { font-size: 12px; color: #ffb74d; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 10px; }
         .culture-maps-link:hover { text-decoration: underline; color: #ffffff; }
         .culture-desc { font-size: 13px; color: #cbd5e1; line-height: 1.4; }
         .culture-submitted-by { font-size: 10px; color: #2dd4bf; font-weight: bold; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        
+        .culture-delete-link { position: absolute; bottom: 14px; right: 14px; font-size: 11px; color: #ef4444; cursor: pointer; font-weight: bold; text-decoration: underline; }
+
         .custom-file-upload { display: block; width: 100%; padding: 10px; background: #0f172a; border: 1px dashed #334155; color: #94a3b8; text-align: center; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
         .custom-file-upload:hover { border-color: #2dd4bf; color: #ffffff; }
 
@@ -449,43 +449,60 @@
             <div id="page-importantPage" class="content app-page">
                 <div class="welcome-title" style="font-size: 20px; margin-bottom: 14px;">De 10 Vigtigste Ting</div>
                 
-                <div class="important-row"><div class="important-num">1</div><div class="important-text"><h4>Digital Arrival Card (MDAC)</h4><p>Skal udfyldes online tidligst 3 dage før ankomst til Malaysia. Brug det direkte link under fanen 'Min Rejse'.</p></div></div>
-                
-                <div class="important-row">
-                    <div class="important-num">2</div>
-                    <div class="important-text">
-                        <h4>Den komplette pakkeliste</h4>
-                        <p>Sørg for at have pakket alt det essentielle udstyr og de rigtige tøjdele til det tropiske klima.</p>
-                        <button class="packing-accordion-btn" onclick="document.getElementById('packingListAcc').classList.toggle('open')"><span class="material-icons" style="font-size:12px;">backpack</span> Se pakkelisten</button>
-                        <div id="packingListAcc" class="packing-content">
-                            <div class="packing-section-title">🏸 Badminton gear</div>
-                            <ul class="packing-list"><li>Ketchere og masser af ekstra strenge/greb</li><li>Indendørssko (må ikke ligge i kufferten alene)</li><li>Spilletøj (gerne til 2 træninger om dagen)</li></ul>
-                            <div class="packing-section-title">☀️ Personligt tøj</div>
-                            <ul class="packing-list"><li>Løst og let sommertøj (det er 30+ grader)</li><li>En tynd jakke/trøje (der er kold aircon i hallen)</li><li>Gode gåsko eller sneakers</li></ul>
-                            <div class="packing-section-title">📂 Dokumenter & Diverse</div>
-                            <ul class="packing-list"><li>Pas (skal være gyldigt 6 måneder frem)</li><li>Kreditkort (gerne to forskellige)</li><li>Rejseforsikringsbevis</li></ul>
+                <div id="importantItemsDynamicContainer">
+                    <div class="important-row"><div class="important-num">1</div><div class="important-text"><h4 id="txt-imp-title-1">Digital Arrival Card (MDAC)</h4><p id="txt-imp-desc-1">Skal udfyldes online tidligst 3 dage før ankomst til Malaysia. Brug det direkte link under fanen 'Min Rejse'.</p></div></div>
+                    
+                    <div class="important-row">
+                        <div class="important-num">2</div>
+                        <div class="important-text">
+                            <h4 id="txt-imp-title-2">Den komplette pakkeliste</h4>
+                            <p id="txt-imp-desc-2">Sørg for at have pakket alt det essentielle udstyr og de rigtige tøjdele til det tropiske klima.</p>
+                            <button class="packing-accordion-btn" onclick="document.getElementById('packingListAcc').classList.toggle('open')"><span class="material-icons" style="font-size:12px;">backpack</span> Se pakkelisten</button>
+                            <div id="packingListAcc" class="packing-content">
+                                <div id="packingListDynamicContainer">
+                                    <div class="packing-section-title">🏸 Badminton gear</div>
+                                    <ul class="packing-list" id="pack-sec-1"><li>Ketchere og masser af ekstra strenge/greb</li><li>Indendørssko (må ikke ligge i kufferten alene)</li><li>Spilletøj (gerne til 2 træninger om dagen)</li></ul>
+                                    <div class="packing-section-title">☀️ Personligt tøj</div>
+                                    <ul class="packing-list" id="pack-sec-2"><li>Løst og let sommertøj (det er 30+ grader)</li><li>En tynd jakke/trøje (der er kold aircon i hallen)</li><li>Gode gåsko eller sneakers</li></ul>
+                                    <div class="packing-section-title">📂 Dokumenter & Diverse</div>
+                                    <ul class="packing-list" id="pack-sec-3"><li>Pas (skal være gyldigt 6 måneder frem)</li><li>Kreditkort (gerne to forskellige)</li><li>Rejseforsikringsbevis</li></ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="important-row"><div class="important-num">3</div><div class="important-text"><h4 id="txt-imp-title-3">Opret en profil på Grab</h4><p id="txt-imp-desc-3">Download appen 'Grab' hjemmefra og tilknyt dit betalingskort. Det er Asiens svar på Uber og er ekstremt billigt og sikkert til taxa i KL.</p></div></div>
+                    <div class="important-row"><div class="important-num">4</div><div class="important-text"><h4 id="txt-imp-title-4">Sprog i Malaysia</h4><p id="txt-imp-desc-4">Næsten alle i Kuala Lumpur snakker flyvende engelsk, så det er super nemt at begå sig i butikker og restauranter.</p></div></div>
+                    <div class="important-row"><div class="important-num">5</div><div class="important-text"><h4 id="txt-imp-title-5">Vaccinationer</h4><p id="txt-imp-desc-5">Husk at tjekke op på dine standardrejsevaccinationer (Stivkrampe og Hepatitis A) i god tid før afrejse.</p></div></div>
+                    <div class="important-row"><div class="important-num">6</div><div class="important-text"><h4 id="txt-imp-title-6">Valuta & Drikkepenge</h4><p id="txt-imp-desc-6">De bruger Malaysiske Ringgit (MYR). Kort modtages næsten overalt, men hav altid lidt kontanter på dig til gademad. Drikkepenge er ikke kutyme.</p></div></div>
+                    <div class="important-row"><div class="important-num">7</div><div class="important-text"><h4 id="txt-imp-title-7">Strømstik</h4><p id="txt-imp-desc-7">Malaysia bruger britiske stik (Type G) med tre flade ben. Husk at pakke en adapter hjemmefra!</p></div></div>
+                    <div class="important-row"><div class="important-num">8</div><div class="important-text"><h4 id="txt-imp-title-8">Kultur & Skikke</h4><p id="txt-imp-desc-8">Vis respekt ved templer. Tag skoene af, hvor det kræves, og dæk skuldre/knæ ved religiøse steder.</p></div></div>
+                    <div class="important-row"><div class="important-num">9</div><div class="important-text"><h4 id="txt-imp-title-9">Drikkevand</h4><p id="txt-imp-desc-9">Drik ALDRIG vandet fra hanen. Køb altid flaskevand, som kan købes på hvert eneste gadehjørne for ingen penge.</p></div></div>
+                    <div class="important-row"><div class="important-num">10</div><div class="important-text"><h4 id="txt-imp-title-10">SIM-kort & Data</h4><p id="txt-imp-desc-10">Det er billigst at købe et lokalt e-SIM kort (f.eks. via Airalo appen) eller et fysisk turist-SIM kort i lufthavnen ved ankomst.</p></div></div>
                 </div>
 
-                <div class="important-row"><div class="important-num">3</div><div class="important-text"><h4>Opret en profil på Grab</h4><p>Download appen 'Grab' hjemmefra og tilknyt dit betalingskort. Det er Asiens svar på Uber og er ekstremt billigt og sikkert til taxa i KL.</p></div></div>
-                <div class="important-row"><div class="important-num">4</div><div class="important-text"><h4>Sprog i Malaysia</h4><p>Næsten alle i Kuala Lumpur snakker flyvende engelsk, så det er super nemt at begå sig i butikker og restauranter.</p></div></div>
-                <div class="important-row"><div class="important-num">5</div><div class="important-text"><h4>Vaccinationer</h4><p>Husk at tjekke op på dine standardrejsevaccinationer (Stivkrampe og Hepatitis A) i god tid før afrejse.</p></div></div>
-                <div class="important-row"><div class="important-num">6</div><div class="important-text"><h4>Valuta & Drikkepenge</h4><p>De bruger Malaysiske Ringgit (MYR). Kort modtages næsten overalt, men hav altid lidt kontanter på dig til gademad. Drikkepenge er ikke kutyme.</p></div></div>
-                <div class="important-row"><div class="important-num">7</div><div class="important-text"><h4>Strømstik</h4><p>Malaysia bruger britiske stik (Type G) med tre flade ben. Husk at pakke en adapter hjemmefra!</p></div></div>
-                <div class="important-row"><div class="important-num">8</div><div class="important-text"><h4>Kultur & Skikke</h4><p>Vis respekt ved templer. Tag skoene af, hvor det kræves, og dæk skuldre/knæ ved religiøse steder.</p></div></div>
-                <div class="important-row"><div class="important-num">9</div><div class="important-text"><h4>Drikkevand</h4><p>Drik ALDRIG vandet fra hanen. Køb altid flaskevand, som kan købes på hvert eneste gadehjørne for ingen penge.</p></div></div>
-                <div class="important-row"><div class="important-num">10</div><div class="important-text"><h4>SIM-kort & Data</h4><p>Det er billigst at købe et lokalt e-SIM kort (f.eks. via Airalo appen) eller et fysisk turist-SIM kort i lufthavnen ved ankomst.</p></div></div>
+                <div id="adminImportantTrigger" class="leader-trigger" style="display: none;"><button onclick="checkAdminPassword('important')">🔒 Rediger Listen & Pakkeliste</button></div>
+                <div id="adminPanelImportant" class="admin-box">
+                    <h3>Hovedliste (De 10 vigtigste ting)</h3>
+                    <p style="font-size:11px; margin-bottom:6px; color:#94a3b8;">Format: Overskrift - Kort beskrivelse (adskilt af linjeskift):</p>
+                    <div class="admin-field">
+                        <textarea id="input-raw-important" style="height:140px;" placeholder="Digital Arrival... - Skal udfyldes online..."></textarea>
+                    </div>
+                    
+                    <h3 style="margin-top:14px;">Pakkeliste</h3>
+                    <p style="font-size:11px; margin-bottom:6px; color:#94a3b8;">Brug # for at skifte kategori (Badminton, Tøj, Dokumenter). Start hver genstand med en ny linje:</p>
+                    <div class="admin-field">
+                        <textarea id="input-raw-packing" style="height:140px;" placeholder="# Badminton gear&#10;Ketchere&#10;Sko&#10;# Personligt tøj&#10;Sommertøj"></textarea>
+                    </div>
+                    <button class="admin-save-btn" onclick="saveImportantAndPackingData()">GEM ALT LIVE TIL SKYEN</button>
+                </div>
             </div>
 
             <div id="page-logistics" class="content app-page">
                 <div class="welcome-title" style="font-size: 20px; margin-bottom: 12px;">Rejseinformation</div>
-                <p style="color: #aaa; font-size: 11px; margin-bottom: 6px; font-weight: bold;">SKIFT VISNING MELLEM HOLDENE:</p>
-                <div class="user-type-selector">
-                    <button id="btnGroupA" class="selector-btn active" onclick="switchUserGroup('A')">Hold A (CPH)</button>
-                    <button id="btnGroupB" class="selector-btn" onclick="switchUserGroup('B')">Hold B (BLL)</button>
-                </div>
+                
                 <a href="https://imigresen-online.imi.gov.my/mdac/main" target="_blank" class="mdac-button"><span class="material-icons">assignment_turned_in</span> Udfyld MDAC</a>
+                
                 <div class="section-title">FLY- OG LOGISTIKDETALJER</div>
                 <div class="info-card">
                     <div class="sub-section-title">✈️ UDREJSE</div>
@@ -502,9 +519,6 @@
                 <div id="adminLogisticsTrigger" class="leader-trigger" style="display: none;"><button onclick="checkAdminPassword('logistics')">🔒 Rejseleder Konsol</button></div>
                 <div id="adminPanelLogistics" class="admin-box">
                     <h3><span class="material-icons">security</span> Fly & Info Dashboard</h3>
-                    <select id="adminGroupSelect" class="admin-group-select" onchange="loadAdminFormGroup()">
-                        <option value="A">Hold A (København)</option> <option value="B">Hold B (Billund)</option>
-                    </select>
                     <div class="admin-field"><label>FLY 1 - UDREJSE</label><input type="text" id="input-fly1-ud"></div>
                     <div class="admin-field"><label>FLY 2 - UDREJSE MELLEMLANDING</label><input type="text" id="input-fly2-ud"></div>
                     <div class="admin-field"><label>MØDETID & STED I LUFTHAVN</label><input type="text" id="input-modetid"></div>
@@ -537,31 +551,35 @@
                 </div>
 
                 <div id="adminApprovalSection" style="display: none;">
-                    <div class="section-title" style="color: #ef4444;">🚨 AFVENTER DIN GODKENDELSE (KASPER)</div>
+                    <div class="section-title" style="color: #ef4444;">🚨 AFVENTER DIN RETTELSE & GODKENDELSE (KASPER)</div>
                     <div id="adminApprovalCardsContainer"></div>
                 </div>
 
                 <div class="section-title">CAMPENS ANBEFALINGER</div>
                 <div id="cultureCardsContainer"></div>
                 
-                <div class="section-title" style="margin-top: 30px; color:#2dd4bf;">💡 TIP DE ANDRE: TILFØJ ET STED</div>
-                <div class="info-card" style="background: rgba(15, 23, 42, 0.65);">
-                    <p style="font-size: 11px; color:#94a3b8; margin-bottom: 12px;">Del dine opdagelser! Dit forslag bliver sendt til Kasper rejseleder til hurtig godkendelse inden det udgives.</p>
-                    <div class="admin-field">
-                        <select id="input-cult-category" class="admin-group-select" style="background-color:#1e293b;">
-                            <option value="MAD">MAD 🍜</option> <option value="SHOPPING">SHOPPING 🛍️</option> <option value="SIGHTSEEING">SIGHTSEEING 🐒</option> <option value="ANDET">ANDET ✨</option>
-                        </select>
+                <div class="info-card" style="background: rgba(45, 212, 191, 0.1); border: 1px solid rgba(45, 212, 191, 0.3); margin-top: 30px; padding: 0; overflow:hidden;">
+                    <div style="padding:16px; cursor:pointer; display:flex; justify-content:between; align-items:center; font-weight:bold; color:#2dd4bf;" onclick="document.getElementById('addCultureFormAccordion').classList.toggle('open')">
+                        <span style="flex-grow:1; display:inline-flex; align-items:center; gap:8px;"><span class="material-icons">add_location_alt</span> 💡 TIP DE ANDRE: KLIK HER FOR AT TILFØJE STED</span>
+                        <span class="material-icons">expand_more</span>
                     </div>
-                    <div class="admin-field"><label>STEDETS NAVN</label><input type="text" id="input-cult-name" placeholder="F.eks. Restoran TG's Nasi Kandar"></div>
-                    <div class="admin-field"><label>WEBADRESSE / LINK (VALGFRIT)</label><input type="text" id="input-cult-url" placeholder="https://..."></div>
-                    <div class="admin-field"><label>ADRESSE (GOOGLE MAPS VENLIG)</label><input type="text" id="input-cult-address" placeholder="Gade, område eller KL bydel"></div>
-                    <div class="admin-field"><label>DIN ANBEFALING (Hvorfor er det fedt?)</label><textarea id="input-cult-desc" style="height:70px;" placeholder="Skriv din korte anmeldelse her..."></textarea></div>
-                    <div class="admin-field">
-                        <label>BILLEDE (VALGFRIT)</label>
-                        <label for="input-cult-file" class="custom-file-upload" style="background-color:#1e293b;"><span id="file-upload-status-text">Vælg billede fra kamera/galleri</span></label>
-                        <input type="file" id="input-cult-file" accept="image/*" style="display:none;" onchange="handleImageUploadConversion(this)">
+                    <div id="addCultureFormAccordion" class="packing-content" style="padding: 0 16px;">
+                        <p style="font-size: 11px; color:#94a3b8; margin-top: 10px; margin-bottom: 12px;">Del dine opdagelser! Dit forslag bliver sendt til Kasper rejseleder til hurtig godkendelse inden det udgives.</p>
+                        <div class="admin-field">
+                            <select id="input-cult-category" class="admin-group-select" style="background-color:#0f172a;">
+                                <option value="MAD">MAD 🍜</option> <option value="SHOPPING">SHOPPING 🛍️</option> <option value="SIGHTSEEING">SIGHTSEEING 🐒</option> <option value="ANDET">ANDET ✨</option>
+                            </select>
+                        </div>
+                        <div class="admin-field"><label>STEDETS NAVN</label><input type="text" id="input-cult-name" placeholder="F.eks. Restoran TG's Nasi Kandar"></div>
+                        <div class="admin-field"><label>WEBADRESSE / LINK (VALGFRIT)</label><input type="text" id="input-cult-url" placeholder="https://..."></div>
+                        <div class="admin-field"><label>ADRESSE (GOOGLE MAPS VENLIG)</label><input type="text" id="input-cult-address" placeholder="Gade, område eller KL bydel"></div>
+                        <div class="admin-field"><label>DIN ANBEFALING (Hvorfor er det fedt?)</label><textarea id="input-cult-desc" style="height:70px;" placeholder="Skriv din korte anmeldelse her..."></textarea></div>
+                        <div class="admin-field">
+                            <label for="input-cult-file" class="custom-file-upload" style="background-color:#0f172a;"><span id="file-upload-status-text">Vælg billede fra kamera/galleri</span></label>
+                            <input type="file" id="input-cult-file" accept="image/*" style="display:none;" onchange="handleImageUploadConversion(this)">
+                        </div>
+                        <button class="admin-save-btn" style="background-color:#2dd4bf; color:#000; margin-bottom:16px;" onclick="saveCultureData()">SEND FORSLAG TIL GODKENDELSE</button>
                     </div>
-                    <button class="admin-save-btn" style="background-color:#2dd4bf; color:#000;" onclick="saveCultureData()">SEND FORSLAG TIL GODKENDELSE</button>
                 </div>
             </div>
 
@@ -596,7 +614,7 @@
         const database = firebase.database();
 
         // GLOBALE VARIABLER
-        let currentGroupView = "A"; 
+        let currentGroupView = "Dream Team"; 
         let activeCultureTab = "MAD"; 
         let base64UploadedImageString = "";
         let globalScheduleRawData = "";
@@ -616,6 +634,7 @@
                     document.getElementById('adminLiveScoreTrigger').style.display = 'block';
                     document.getElementById('adminLogisticsTrigger').style.display = 'block';
                     document.getElementById('adminScheduleTrigger').style.display = 'block';
+                    document.getElementById('adminImportantTrigger').style.display = 'block';
                 }
                 
                 navigateTo('dashboard');
@@ -677,6 +696,13 @@
             database.ref('master_schedule').on('value', (snapshot) => { globalScheduleRawData = snapshot.val() || ""; renderScheduleDisplay(globalScheduleRawData); updateDashboardNextActivity(globalScheduleRawData); });
             database.ref('chat_messages').limitToLast(50).on('value', (snapshot) => { renderChatMessages(snapshot.val()); });
             database.ref('culture_guide').on('value', (snapshot) => { renderCultureCards(snapshot.val()); });
+            
+            database.ref('important_things').on('value', (snapshot) => {
+                renderImportantDisplay(snapshot.val());
+            });
+            database.ref('packing_list_raw').on('value', (snapshot) => {
+                renderPackingListDisplay(snapshot.val());
+            });
         }
 
         // --- NAVIGATION ENGINE ---
@@ -717,14 +743,98 @@
 
         // --- LEDER ADGANGSKODE TJEK ---
         function checkAdminPassword(panelType) {
-            const ids = { logistics: 'adminPanelLogistics', schedule: 'adminPanelSchedule', livescore: 'adminPanelLivescore' };
+            const ids = { logistics: 'adminPanelLogistics', schedule: 'adminPanelSchedule', livescore: 'adminPanelLivescore', important: 'adminPanelImportant' };
             const panel = document.getElementById(ids[panelType]); if (panel.style.display === 'block') { panel.style.display = 'none'; return; }
             if (prompt("Bekræft rejseleder adgangskode:") === "1234") {
                 panel.style.display = 'block';
                 if(panelType === 'logistics') loadAdminFormGroup();
                 if(panelType === 'schedule') document.getElementById('input-raw-schedule').value = globalScheduleRawData;
                 if(panelType === 'livescore') database.ref('live_matches').once('value', s => { document.getElementById('input-raw-matches').value = s.val() || ""; });
+                if(panelType === 'important') loadAdminImportantForm();
             } else { alert("Adgang nægtet."); }
+        }
+
+        // --- DE 10 VIGTIGSTE TING ENGINE (RENHOLDT MED PAKKELISTEN INTRAKT) ---
+        function loadAdminImportantForm() {
+            let rawString = "";
+            for (let i = 1; i <= 10; i++) {
+                const title = document.getElementById(`txt-imp-title-${i}`).innerText;
+                const desc = document.getElementById(`txt-imp-desc-${i}`).innerText;
+                rawString += `${title} - ${desc}${i < 10 ? '\n' : ''}`;
+            }
+            document.getElementById('input-raw-important').value = rawString;
+            
+            database.ref('packing_list_raw').once('value', (snapshot) => {
+                const rawPacking = snapshot.val();
+                if(rawPacking) {
+                    document.getElementById('input-raw-packing').value = rawPacking;
+                } else {
+                    document.getElementById('input-raw-packing').value = `# Badminton gear\nKetchere og masser af ekstra strenge/greb\nIndendørssko (må ikke ligge i kufferten alene)\nSpilletøj (gerne til 2 træninger om dagen)\n# Personligt tøj\nLøst og let sommertøj (det er 30+ grader)\nEn tynd jakke/trøje (der er kold aircon i hallen)\nGode gåsko eller sneakers\n# Dokumenter & Diverse\nPas (skal være gyldigt 6 måneder frem)\nKreditkort (gerne to forskellige)\nRejseforsikringsbevis`;
+                }
+            });
+        }
+
+        function saveImportantAndPackingData() {
+            const txtImp = document.getElementById('input-raw-important').value.trim();
+            const txtPack = document.getElementById('input-raw-packing').value.trim();
+            
+            if(!txtImp || !txtPack) return;
+            
+            database.ref('important_things').set(txtImp);
+            database.ref('packing_list_raw').set(txtPack).then(() => {
+                alert("Både de 10 punkter og den interaktive pakkeliste er opdateret live!");
+                document.getElementById('adminPanelImportant').style.display = 'none';
+            });
+        }
+
+        function renderImportantDisplay(rawText) {
+            if(!rawText) return;
+            const lines = rawText.split('\n').filter(l => l.trim() !== "");
+            lines.forEach((line, index) => {
+                const parts = line.split('-');
+                const title = parts[0] ? parts[0].trim() : "";
+                const desc = parts[1] ? parts[1].trim() : "";
+                const itemNum = index + 1;
+                
+                if(itemNum <= 10) {
+                    const titleEl = document.getElementById(`txt-imp-title-${itemNum}`);
+                    const descEl = document.getElementById(`txt-imp-desc-${itemNum}`);
+                    if(titleEl) titleEl.innerText = title;
+                    if(descEl) descEl.innerText = desc;
+                }
+            });
+        }
+
+        function renderPackingListDisplay(rawText) {
+            if(!rawText) return;
+            const container = document.getElementById('packingListDynamicContainer');
+            const lines = rawText.split('\n').filter(l => l.trim() !== "");
+            let html = "";
+            let insideList = false;
+            
+            lines.forEach((line) => {
+                if(line.startsWith('#')) {
+                    if(insideList) {
+                        html += `</ul>`;
+                        insideList = false;
+                    }
+                    const categoryTitle = line.replace('#', '').trim();
+                    let icon = "backpack";
+                    if(categoryTitle.toLowerCase().includes("badminton")) icon = "sports_tennis";
+                    if(categoryTitle.toLowerCase().includes("tøj") || categoryTitle.toLowerCase().includes("personligt")) icon = "wb_sunny";
+                    if(categoryTitle.toLowerCase().includes("dok") || categoryTitle.toLowerCase().includes("diverse")) icon = "folder";
+                    
+                    html += `<div class="packing-section-title"> ${icon === "sports_tennis" ? '🏸' : icon === "wb_sunny" ? '☀️' : '📂'} ${categoryTitle}</div>`;
+                } else {
+                    if(!insideList) {
+                        html += `<ul class="packing-list">`;
+                        insideList = true;
+                    }
+                    html += `<li>${line.trim()}</li>`;
+                }
+            });
+            if(insideList) html += `</ul>`;
+            container.innerHTML = html;
         }
 
         // --- DANSKE KAMPE LIVE ENGINE ---
@@ -750,10 +860,9 @@
             }
         }
 
-        // --- FLY & LOGISTIK ENGINE ---
-        function switchUserGroup(g) { currentGroupView = g; renderLogisticsDisplay(); document.getElementById('btnGroupA').classList.toggle('active', g==='A'); document.getElementById('btnGroupB').classList.toggle('active', g==='B'); }
-        function loadAdminFormGroup() { const g = document.getElementById('adminGroupSelect').value; database.ref(`logistics/${g}`).once('value', (s) => { const data = s.val() || {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { document.getElementById(`input-${f}`).value = data[f] || ''; }); }); }
-        function saveLogisticsData() { const g = document.getElementById('adminGroupSelect').value; const updateObj = {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { updateObj[f] = document.getElementById(`input-${f}`).value; }); database.ref(`logistics/${g}`).set(updateObj).then(() => { alert("Flydata gemt!"); renderLogisticsDisplay(); }); }
+        // --- FLY & LOGISTIK ENGINE (FASTLÅST TIL HOLD DREAM TEAM) ---
+        function loadAdminFormGroup() { database.ref(`logistics/${currentGroupView}`).once('value', (s) => { const data = s.val() || {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { document.getElementById(`input-${f}`).value = data[f] || ''; }); }); }
+        function saveLogisticsData() { const updateObj = {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { updateObj[f] = document.getElementById(`input-${f}`).value; }); database.ref(`logistics/${currentGroupView}`).set(updateObj).then(() => { alert("Fly- og logistikdata gemt!"); renderLogisticsDisplay(); document.getElementById('adminPanelLogistics').style.display = 'none'; }); }
         function renderLogisticsDisplay() { database.ref(`logistics/${currentGroupView}`).once('value', (s) => { const data = s.val() || {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { document.getElementById(`display-${f}`).innerHTML = data[f] || ''; }); }); }
 
         // --- MASTER PROGRAM ENGINE ---
@@ -836,7 +945,7 @@
         }
         function toggleLikeMessage(msgId, myName, alreadyLiked) { if(alreadyLiked) { database.ref(`chat_messages/${msgId}/likes/${myName}`).remove(); } else { database.ref(`chat_messages/${msgId}/likes/${myName}`).set(true); } }
 
-        // --- KULTUR-GUIDE ENGINE MED REJSELEDER GODKENDELSE ---
+        // --- KULTUR-GUIDE ENGINE MED AVANCERET KASPER-GODKENDELSES-REDIGERING ---
         function switchCultureTab(t) { activeCultureTab = t; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.getElementById(`tab-${t}`).classList.add('active'); database.ref('culture_guide').once('value', s => renderCultureCards(s.val())); }
         function handleImageUploadConversion(i) { const f = i.files[0]; if (!f) return; const r = new FileReader(); r.onload = function(e) { base64UploadedImageString = e.target.result; document.getElementById('file-upload-status-text').innerHTML = "✅ Billede klar!"; document.getElementById('file-upload-status-text').style.color = "#2dd4bf"; }; r.readAsDataURL(f); }
         
@@ -844,23 +953,32 @@
             const cat = document.getElementById('input-cult-category').value; const name = document.getElementById('input-cult-name').value.trim(); const url = document.getElementById('input-cult-url').value.trim(); const addr = document.getElementById('input-cult-address').value.trim(); const desc = document.getElementById('input-cult-desc').value.trim();
             if(name === "" || addr === "") { alert("Navn og adresse skal udfyldes!"); return; }
             let finalImage = base64UploadedImageString; if(finalImage === "") finalImage = "https://images.unsplash.com/photo-1596422846543-75c6fc18a523?auto=format&fit=crop&q=80&w=350&h=140";
-            
             const senderName = auth.currentUser.displayName || "Deltager";
 
-            // SÅDAN KASPER: Alle forslag gemmes med 'approved: false'. Det lander i din kø!
             database.ref('culture_guide').push({
                 category: cat, name: name, url: url, address: addr, desc: desc, img: finalImage,
                 approved: false, submittedBy: senderName
             }).then(() => {
                 alert("Mange tak for tippet! Dit forslag er sendt til Kasper til godkendelse.");
                 document.getElementById('input-cult-name').value = ""; document.getElementById('input-cult-url').value = ""; document.getElementById('input-cult-address').value = ""; document.getElementById('input-cult-desc').value = ""; base64UploadedImageString = ""; document.getElementById('file-upload-status-text').innerHTML = "Vælg billede fra kamera/galleri"; document.getElementById('file-upload-status-text').style.color = "#94a3b8";
+                document.getElementById('addCultureFormAccordion').classList.remove('open');
             });
         }
 
-        // REJSELEDER METODER TIL AT STYRE KØEN
-        function approvePlace(key) {
-            database.ref(`culture_guide/${key}`).update({ approved: true }).then(() => { alert("Stedet er godkendt og lagt live i guiden!"); });
+        function executeAdminApprovalWithEdits(key, originalImg, originalSender) {
+            const cat = document.getElementById(`approve-cat-${key}`).value;
+            const name = document.getElementById(`approve-name-${key}`).value.trim();
+            const url = document.getElementById(`approve-url-${key}`).value.trim();
+            const addr = document.getElementById(`approve-addr-${key}`).value.trim();
+            const desc = document.getElementById(`approve-desc-${key}`).value.trim();
+
+            if(!name || !addr) { alert("Navn og adresse må ikke slettes!"); return; }
+
+            database.ref(`culture_guide/${key}`).set({
+                category: cat, name: name, url: url, address: addr, desc: desc, img: originalImg, submittedBy: originalSender, approved: true
+            }).then(() => { alert("Stedet er tilpasset, godkendt og lagt live i guiden!"); });
         }
+
         function deletePlace(key) {
             if(confirm("Vil du slette dette forslag permanent?")) { database.ref(`culture_guide/${key}`).remove(); }
         }
@@ -871,34 +989,41 @@
             const approvalContainer = document.getElementById('adminApprovalCardsContainer');
             const dashboardBadge = document.getElementById('approvalBadge');
             
-            if(!data) return;
+            if(!data) { container.innerHTML = `<p style="color:#94a3b8; font-style:italic; text-align:center; padding: 20px 0;">Tom kategori... 🌴</p>`; return; }
             
             let mainHtml = ""; let approvalHtml = ""; let pendingCount = 0;
             
             Object.keys(data).forEach(key => {
                 const place = data[key];
                 
-                // HVIS DET ER UGODKENDT -> Sorter til rejselederens kø
                 if (place.approved === false) {
                     pendingCount++;
                     if (isRejseleder) {
                         approvalHtml += `<div class="admin-approval-card">
-                            <div style="font-size:11px; color:#ef4444; font-weight:bold; margin-bottom:4px;">INDSENDT AF: ${place.submittedBy || 'Deltager'} (${place.category})</div>
-                            <h4 style="font-size:16px; margin-bottom:2px;">${place.name}</h4>
-                            <p style="font-size:12px; color:#aaa; margin-bottom:4px;">📍 ${place.address}</p>
-                            <p style="font-size:13px; margin-bottom:12px; font-style:italic;">"${place.desc}"</p>
-                            <div style="display:flex; gap:8px;">
-                                <button onclick="approvePlace('${key}')" style="flex:1; padding:8px; background-color:#10b981; color:white; border:none; border-radius:6px; font-weight:bold; font-size:12px; cursor:pointer;">🟢 GODKEND & UDGIV</button>
-                                <button onclick="deletePlace('${key}')" style="padding:8px; background-color:#ef4444; color:white; border:none; border-radius:6px; font-weight:bold; font-size:12px; cursor:pointer;">🔴 SLET</button>
+                            <div style="font-size:11px; color:#ef4444; font-weight:bold; margin-bottom:6px;">FORSLAG FRA: ${place.submittedBy || 'Deltager'}</div>
+                            <label style="color:#94a3b8; font-size:10px; font-weight:bold;">KATEGORI</label>
+                            <select id="approve-cat-${key}" style="padding:6px; width:100%; margin-bottom:8px; background:#0f172a; color:#fff; border:1px solid #ef4444; border-radius:6px; font-weight:bold;">
+                                <option value="MAD" ${place.category==='MAD'?'selected':''}>MAD 🍜</option>
+                                <option value="SHOPPING" ${place.category==='SHOPPING'?'selected':''}>SHOPPING 🛍️</option>
+                                <option value="SIGHTSEEING" ${place.category==='SIGHTSEEING'?'selected':''}>SIGHTS 🐒</option>
+                                <option value="ANDET" ${place.category==='ANDET'?'selected':''}>ANDET ✨</option>
+                            </select>
+                            <label style="color:#94a3b8; font-size:10px; font-weight:bold;">STEDETS NAVN</label><input type="text" id="approve-name-${key}" value="${place.name}">
+                            <label style="color:#94a3b8; font-size:10px; font-weight:bold;">LINK/URL</label><input type="text" id="approve-url-${key}" value="${place.url || ''}" placeholder="Intet link angivet...">
+                            <label style="color:#94a3b8; font-size:10px; font-weight:bold;">ADRESSE</label><input type="text" id="approve-addr-${key}" value="${place.address}">
+                            <label style="color:#94a3b8; font-size:10px; font-weight:bold;">ANBEFALING</label><textarea id="approve-desc-${key}" style="height:50px;">${place.desc}</textarea>
+                            <div style="display:flex; gap:8px; margin-top:4px;">
+                                <button onclick="executeAdminApprovalWithEdits('${key}', '${place.img}', '${place.submittedBy}')" style="flex:1; padding:8px; background-color:#10b981; color:white; border:none; border-radius:6px; font-weight:bold; font-size:12px; cursor:pointer;">🟢 GODKEND MED RETTELSER</button>
+                                <button onclick="deletePlace('${key}')" style="padding:8px; background-color:#ef4444; color:white; border:none; border-radius:6px; font-weight:bold; font-size:12px; cursor:pointer;">AFVIS</button>
                             </div>
                         </div>`;
                     }
                 } 
-                // HVIS DET ER GODKENDT -> Vis i den rigtige guide
                 else if (place.category === activeCultureTab) {
                     const webLink = place.url ? `href="${place.url}" target="_blank"` : `href="#" onclick="alert('Ingen hjemmeside registreret'); return false;"`;
                     const mapsLink = `href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" target="_blank"`;
                     const submittedTag = place.submittedBy ? `<div class="culture-submitted-by">Tip fra: ${place.submittedBy} ✨</div>` : '';
+                    const deleteBtn = isRejseleder ? `<div class="culture-delete-link" onclick="deletePlace('${key}')">Slet sted 🗑️</div>` : '';
                     
                     mainHtml += `<div class="culture-card">
                         <div class="culture-card-img" style="background-image: url('${place.img}')"></div>
@@ -907,12 +1032,12 @@
                             <a ${mapsLink} class="culture-maps-link"><span class="material-icons" style="font-size:14px;">near_me</span> Vis på kort</a>
                             <div class="culture-desc">${place.desc}</div>
                             ${submittedTag}
+                            ${deleteBtn}
                         </div>
                     </div>`;
                 }
             });
             
-            // Håndter Rejseleder-visning af køen
             if (isRejseleder && pendingCount > 0) {
                 approvalSection.style.display = 'block';
                 approvalContainer.innerHTML = approvalHtml;
