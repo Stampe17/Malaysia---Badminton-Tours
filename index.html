@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Malaysian Way - Live Master App</title>
     
-    <link class="js-meta-icon" rel="apple-touch-icon" href="app-icon.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="apple-touch-icon" href="app-icon.jpg">
     <link rel="icon" type="image/jpeg" href="app-icon.jpg">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -42,11 +46,10 @@
             border-radius: 40px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             border: 12px solid #222;
-            overflow: hidden; /* Vigtigt for fastlåst chat-visning */
+            overflow: hidden;
             position: relative;
         }
 
-        /* SCROLL BAR APPLIKERES KUN PÅ INDHOLDET NU */
         .scrollable-content {
             height: calc(100% - 78px);
             overflow-y: auto;
@@ -75,7 +78,7 @@
         .toggle-auth-mode-text { font-size: 13px; color: #cbd5e1; margin-top: 20px; cursor: pointer; font-weight: 600; text-decoration: underline; }
         .toggle-auth-mode-text:hover { color: #ffb74d; }
 
-        /* TOPBAR (LÅST FAST I TOPPEN) */
+        /* TOPBAR (FASTLÅST) */
         .app-bar {
             background-color: rgba(13, 35, 60, 0.95);
             backdrop-filter: blur(10px);
@@ -103,12 +106,18 @@
         /* BRANDING */
         .welcome-title { font-size: 28px; font-weight: 800; color: #ffffff; margin-bottom: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); letter-spacing: -0.5px; }
 
-        /* VEJR-KNAP */
+        /* VEJR-KNAP & top knapper */
+        .dashboard-buttons { display: flex; gap: 8px; margin-bottom: 24px; }
         .location-info {
-            font-size: 13px; color: #e2e8f0; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 24px; font-weight: 600; 
-            background: rgba(255, 255, 255, 0.08); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; backdrop-filter: blur(5px);
+            font-size: 12px; color: #e2e8f0; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; 
+            background: rgba(255, 255, 255, 0.08); padding: 8px 12px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; backdrop-filter: blur(5px); flex: 1;
         }
-        .location-info .material-icons { color: #ff9800; }
+        .location-info .material-icons { color: #ff9800; font-size: 16px; }
+        
+        .important-info-btn {
+            background: linear-gradient(135deg, #b45309, #78350f); border: 1px solid rgba(251, 191, 36, 0.2); color: #fef08a;
+            font-size: 11px; font-weight: 800; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer; flex: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
 
         /* NÆSTE AKTIVITET CARD */
         .activity-card {
@@ -133,6 +142,18 @@
         .menu-card .material-icons { font-size: 34px; margin-bottom: 10px; }
         .menu-card p { font-size: 12px; font-weight: 700; color: #ffffff; }
         .badge { display: none; position: absolute; top: 12px; right: 12px; background-color: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 3px 7px; border-radius: 50%; }
+
+        /* 10 VIGTIGSTE DESIGN */
+        .important-row { background: rgba(30, 41, 59, 0.75); border-radius: 14px; padding: 14px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.03); color: white; display: flex; gap: 12px; align-items: flex-start; }
+        .important-num { background: #ff9800; color: #000; font-weight: 900; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; shrink: 0; font-size: 13px; }
+        .important-text h4 { font-size: 14px; font-weight: 800; margin-bottom: 2px; color: #fff; }
+        .important-text p { font-size: 12px; color: #cbd5e1; line-height: 1.4; }
+        .packing-accordion-btn { background: rgba(255,255,255,0.06); border: 1px dashed rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 8px; color: #2dd4bf; font-size: 11px; font-weight: bold; cursor: pointer; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; }
+        .packing-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding-left: 4px; }
+        .packing-content.open { max-height: 500px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; }
+        .packing-section-title { font-size: 10px; font-weight: 900; color: #ffb74d; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; margin-top: 8px; }
+        .packing-section-title:first-child { margin-top: 0; }
+        .packing-list { font-size: 12px; color: #94a3b8; line-height: 1.5; padding-left: 14px; }
 
         /* CARDS & LIVE SCORE MODUL */
         .info-card { background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(10px); padding: 18px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.05); color: white; }
@@ -191,24 +212,10 @@
         .selector-btn.active { background: #047857; border-color: #047857; }
         .mdac-button { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-top: 10px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); }
 
-        /* --- CHAT-VISNING RETTET TIL FAST LÅST APP-BAR --- */
-        .chat-layout {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.4);
-        }
-        .chat-messages-box { 
-            flex-grow: 1; 
-            padding: 16px 14px; 
-            overflow-y: auto; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px;
-            scroll-behavior: auto; /* Deaktiver smooth scroll lige under hop, så det ikke blinker */
-        }
+        /* CHAT LAYOUT */
+        .chat-layout { display: flex; flex-direction: column; height: 100%; background: rgba(15, 23, 42, 0.4); }
+        .chat-messages-box { flex-grow: 1; padding: 16px 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scroll-behavior: auto; }
         .chat-messages-box::-webkit-scrollbar { display: none; }
-        
         .chat-bubble-wrapper { display: flex; flex-direction: column; max-width: 75%; width: fit-content; }
         .chat-bubble-wrapper.me { align-self: flex-end; }
         .chat-bubble-wrapper.other { align-self: flex-start; }
@@ -223,13 +230,8 @@
         .chat-bubble-wrapper.me .like-trigger-btn { left: -8px; right: auto; }
         .like-trigger-btn.liked { color: #ef4444; background: #ffe4e6; }
         
-        /* CHAT RØD SKILLELINJE STYLE */
-        .chat-unread-divider {
-            display: flex; align-items: center; text-align: center; color: #f87171; font-size: 10px; font-weight: 800; letter-spacing: 1px; margin: 15px 0; width: 100%; scroll-margin-top: 20px;
-        }
-        .chat-unread-divider::before, .chat-unread-divider::after {
-            content: ''; flex: 1; border-bottom: 2px solid #ef4444; opacity: 0.6;
-        }
+        .chat-unread-divider { display: flex; align-items: center; text-align: center; color: #f87171; font-size: 10px; font-weight: 800; letter-spacing: 1px; margin: 15px 0; width: 100%; scroll-margin-top: 20px; }
+        .chat-unread-divider::before, .chat-unread-divider::after { content: ''; flex: 1; border-bottom: 2px solid #ef4444; opacity: 0.6; }
         .chat-unread-divider:not(:empty)::before { margin-right: 1em; }
         .chat-unread-divider:not(:empty)::after { margin-left: 1em; }
 
@@ -237,10 +239,14 @@
         .chat-text-input { flex-grow: 1; padding: 12px 16px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 20px; font-size: 13px; }
         .chat-send-btn { background: #047857; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; shrink: 0; }
 
-        /* KULTUR-GUIDE */
+        /* KULTUR-GUIDE & APPROVAL BOX */
         .culture-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 20px; }
         .tab-btn { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.05); color: #94a3b8; padding: 10px 4px; border-radius: 10px; font-size: 10px; font-weight: 800; cursor: pointer; text-align: center; }
         .tab-btn.active { background: #ff9800; color: #000; font-weight: 900; box-shadow: 0 4px 10px rgba(255,152,0,0.3); }
+        
+        .approval-alert-badge { background-color: #ef4444; color: white; font-size: 9px; padding: 2px 5px; border-radius: 10px; margin-left: 4px; font-weight: bold; }
+        .admin-approval-card { background: rgba(239, 68, 68, 0.15); border: 2px dashed #ef4444; border-radius: 16px; padding: 14px; margin-bottom: 16px; color: white; }
+        
         .culture-card { background: rgba(30, 41, 59, 0.8); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); color: white; }
         .culture-card-img { height: 140px; background-size: cover; background-position: center; position: relative; background-color: #1e293b; }
         .culture-card-body { padding: 14px; }
@@ -249,15 +255,13 @@
         .culture-maps-link { font-size: 12px; color: #ffb74d; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 10px; }
         .culture-maps-link:hover { text-decoration: underline; color: #ffffff; }
         .culture-desc { font-size: 13px; color: #cbd5e1; line-height: 1.4; }
+        .culture-submitted-by { font-size: 10px; color: #2dd4bf; font-weight: bold; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
         .custom-file-upload { display: block; width: 100%; padding: 10px; background: #0f172a; border: 1px dashed #334155; color: #94a3b8; text-align: center; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
         .custom-file-upload:hover { border-color: #2dd4bf; color: #ffffff; }
 
-        /* VEJR POPUP DESIGN */
-        .weather-modal { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background-color: rgba(10, 23, 18, 0.98); backdrop-filter: blur(20px);
-            z-index: 150; padding: 45px 18px; display: none; color: white; flex-direction: column; 
-        }
+        /* MODAL POPUPS & VEJR */
+        .weather-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 23, 18, 0.98); backdrop-filter: blur(20px); z-index: 150; padding: 45px 18px; display: none; color: white; flex-direction: column; }
         .weather-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px; }
         .weather-header h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
         .close-btn { background: none; border: none; color: #94a3b8; cursor: pointer; }
@@ -275,17 +279,8 @@
         .hourly-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #e2e8f0; }
         .hourly-row:last-child { border-bottom: none; }
 
-        /* MODAL POPUPS */
-        .logout-modal {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px);
-            z-index: 200; display: flex; justify-content: center; align-items: center; padding: 24px;
-        }
-        .logout-card {
-            background-color: #1e293b; border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px; padding: 24px; width: 100%; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5); color: white;
-        }
+        .logout-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); z-index: 200; display: flex; justify-content: center; align-items: center; padding: 24px; }
+        .logout-card { background-color: #1e293b; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 24px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); color: white; }
         .logout-card .material-icons { font-size: 44px; color: #ef4444; margin-bottom: 12px; }
         .logout-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
         .logout-card p { font-size: 13px; color: #94a3b8; margin-bottom: 24px; font-weight: 500; }
@@ -296,7 +291,7 @@
         .welcome-card-icon { color: #10b981 !important; }
         .logout-btn-welcome { flex: 1; padding: 14px; background: linear-gradient(135deg, #047857, #065f46); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(4,120,87,0.3); }
 
-        /* ADMIN BOXES */
+        /* ADMIN CONTROL BOXES */
         .admin-box { background-color: #1e293b; border: 2px solid #2dd4bf; border-radius: 16px; padding: 16px; color: white; margin-top: 20px; display: none; }
         .admin-box h3 { color: #2dd4bf; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
         .admin-group-select { width: 100%; padding: 10px; background-color: #0f172a; color: white; border: 1px solid #334155; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
@@ -382,9 +377,14 @@
             <div id="page-dashboard" class="content app-page">
                 <div class="welcome-title">THE MALAYSIAN WAY</div>
                 
-                <div class="location-info" onclick="toggleWeather(true)">
-                    <span class="material-icons" style="font-size: 16px;">location_on</span>
-                    <span id="currentWeatherText">Kuala Lumpur • Henter...</span>
+                <div class="dashboard-buttons">
+                    <div class="location-info" onclick="toggleWeather(true)">
+                        <span class="material-icons">location_on</span>
+                        <span id="currentWeatherText">Kuala Lumpur • Henter...</span>
+                    </div>
+                    <button class="important-info-btn" onclick="navigateTo('importantPage')">
+                        <span class="material-icons" style="font-size:14px;">warning</span> 10 VIGTIGSTE TING
+                    </button>
                 </div>
 
                 <div class="activity-card">
@@ -400,7 +400,7 @@
                 <div class="menu-grid">
                     <div class="menu-card" onclick="navigateTo('logistics')"><span class="material-icons" style="color: #ff9800;">flight_takeoff</span><p>MIN REJSE</p></div>
                     <div class="menu-card" onclick="navigateTo('schedulePage')"><span class="material-icons" style="color: #10b981;">calendar_month</span><p>DAGSPLAN</p></div>
-                    <div class="menu-card" onclick="navigateTo('culturePage')"><span class="material-icons" style="color: #a855f7;">museum</span><p>KULTUR-GUIDE</p></div>
+                    <div class="menu-card" onclick="navigateTo('culturePage')"><span class="material-icons" style="color: #a855f7;">museum</span><p>KULTUR-GUIDE<span id="approvalBadge" class="approval-alert-badge" style="display:none;">0</span></p></div>
                     <div class="menu-card" onclick="navigateTo('chatPage')"><span class="material-icons" style="color: #06b6d4;">chat_bubble</span><p>GRUPPE-CHAT</p><div id="chatBadge" class="badge">0</div></div>
                 </div>
 
@@ -444,6 +444,38 @@
                     </div>
                     <button class="admin-save-btn" onclick="saveLiveScoreData()">GEM PROGRAM TIL SKYEN</button>
                 </div>
+            </div>
+
+            <div id="page-importantPage" class="content app-page">
+                <div class="welcome-title" style="font-size: 20px; margin-bottom: 14px;">De 10 Vigtigste Ting</div>
+                
+                <div class="important-row"><div class="important-num">1</div><div class="important-text"><h4>Digital Arrival Card (MDAC)</h4><p>Skal udfyldes online tidligst 3 dage før ankomst til Malaysia. Brug det direkte link under fanen 'Min Rejse'.</p></div></div>
+                
+                <div class="important-row">
+                    <div class="important-num">2</div>
+                    <div class="important-text">
+                        <h4>Den komplette pakkeliste</h4>
+                        <p>Sørg for at have pakket alt det essentielle udstyr og de rigtige tøjdele til det tropiske klima.</p>
+                        <button class="packing-accordion-btn" onclick="document.getElementById('packingListAcc').classList.toggle('open')"><span class="material-icons" style="font-size:12px;">backpack</span> Se pakkelisten</button>
+                        <div id="packingListAcc" class="packing-content">
+                            <div class="packing-section-title">🏸 Badminton gear</div>
+                            <ul class="packing-list"><li>Ketchere og masser af ekstra strenge/greb</li><li>Indendørssko (må ikke ligge i kufferten alene)</li><li>Spilletøj (gerne til 2 træninger om dagen)</li></ul>
+                            <div class="packing-section-title">☀️ Personligt tøj</div>
+                            <ul class="packing-list"><li>Løst og let sommertøj (det er 30+ grader)</li><li>En tynd jakke/trøje (der er kold aircon i hallen)</li><li>Gode gåsko eller sneakers</li></ul>
+                            <div class="packing-section-title">📂 Dokumenter & Diverse</div>
+                            <ul class="packing-list"><li>Pas (skal være gyldigt 6 måneder frem)</li><li>Kreditkort (gerne to forskellige)</li><li>Rejseforsikringsbevis</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="important-row"><div class="important-num">3</div><div class="important-text"><h4>Opret en profil på Grab</h4><p>Download appen 'Grab' hjemmefra og tilknyt dit betalingskort. Det er Asiens svar på Uber og er ekstremt billigt og sikkert til taxa i KL.</p></div></div>
+                <div class="important-row"><div class="important-num">4</div><div class="important-text"><h4>Sprog i Malaysia</h4><p>Næsten alle i Kuala Lumpur snakker flyvende engelsk, så det er super nemt at begå sig i butikker og restauranter.</p></div></div>
+                <div class="important-row"><div class="important-num">5</div><div class="important-text"><h4>Vaccinationer</h4><p>Husk at tjekke op på dine standardrejsevaccinationer (Stivkrampe og Hepatitis A) i god tid før afrejse.</p></div></div>
+                <div class="important-row"><div class="important-num">6</div><div class="important-text"><h4>Valuta & Drikkepenge</h4><p>De bruger Malaysiske Ringgit (MYR). Kort modtages næsten overalt, men hav altid lidt kontanter på dig til gademad. Drikkepenge er ikke kutyme.</p></div></div>
+                <div class="important-row"><div class="important-num">7</div><div class="important-text"><h4>Strømstik</h4><p>Malaysia bruger britiske stik (Type G) med tre flade ben. Husk at pakke en adapter hjemmefra!</p></div></div>
+                <div class="important-row"><div class="important-num">8</div><div class="important-text"><h4>Kultur & Skikke</h4><p>Vis respekt ved templer. Tag skoene af, hvor det kræves, og dæk skuldre/knæ ved religiøse steder.</p></div></div>
+                <div class="important-row"><div class="important-num">9</div><div class="important-text"><h4>Drikkevand</h4><p>Drik ALDRIG vandet fra hanen. Køb altid flaskevand, som kan købes på hvert eneste gadehjørne for ingen penge.</p></div></div>
+                <div class="important-row"><div class="important-num">10</div><div class="important-text"><h4>SIM-kort & Data</h4><p>Det er billigst at købe et lokalt e-SIM kort (f.eks. via Airalo appen) eller et fysisk turist-SIM kort i lufthavnen ved ankomst.</p></div></div>
             </div>
 
             <div id="page-logistics" class="content app-page">
@@ -503,25 +535,33 @@
                     <button id="tab-SIGHTSEEING" class="tab-btn" onclick="switchCultureTab('SIGHTSEEING')">SIGHTS 🐒</button>
                     <button id="tab-ANDET" class="tab-btn" onclick="switchCultureTab('ANDET')">ANDET ✨</button>
                 </div>
+
+                <div id="adminApprovalSection" style="display: none;">
+                    <div class="section-title" style="color: #ef4444;">🚨 AFVENTER DIN GODKENDELSE (KASPER)</div>
+                    <div id="adminApprovalCardsContainer"></div>
+                </div>
+
+                <div class="section-title">CAMPENS ANBEFALINGER</div>
                 <div id="cultureCardsContainer"></div>
-                <div id="adminCultureTrigger" class="leader-trigger" style="margin-top: 30px; display: none;"><button onclick="checkAdminPassword('culture')">🔒 Tilføj Nyt Sted</button></div>
-                <div id="adminPanelCulture" class="admin-box">
-                    <h3><span class="material-icons">add_location_alt</span> Tilføj Anbefaling</h3>
+                
+                <div class="section-title" style="margin-top: 30px; color:#2dd4bf;">💡 TIP DE ANDRE: TILFØJ ET STED</div>
+                <div class="info-card" style="background: rgba(15, 23, 42, 0.65);">
+                    <p style="font-size: 11px; color:#94a3b8; margin-bottom: 12px;">Del dine opdagelser! Dit forslag bliver sendt til Kasper rejseleder til hurtig godkendelse inden det udgives.</p>
                     <div class="admin-field">
-                        <select id="input-cult-category" class="admin-group-select">
+                        <select id="input-cult-category" class="admin-group-select" style="background-color:#1e293b;">
                             <option value="MAD">MAD 🍜</option> <option value="SHOPPING">SHOPPING 🛍️</option> <option value="SIGHTSEEING">SIGHTSEEING 🐒</option> <option value="ANDET">ANDET ✨</option>
                         </select>
                     </div>
-                    <div class="admin-field"><label>NAVN PÅ STEDET</label><input type="text" id="input-cult-name"></div>
-                    <div class="admin-field"><label>WEBADRESSE (LINK)</label><input type="text" id="input-cult-url"></div>
-                    <div class="admin-field"><label>ADRESSE (GOOGLE MAPS VENLIG)</label><input type="text" id="input-cult-address"></div>
-                    <div class="admin-field"><label>BESKRIVELSE</label><textarea id="input-cult-desc"></textarea></div>
+                    <div class="admin-field"><label>STEDETS NAVN</label><input type="text" id="input-cult-name" placeholder="F.eks. Restoran TG's Nasi Kandar"></div>
+                    <div class="admin-field"><label>WEBADRESSE / LINK (VALGFRIT)</label><input type="text" id="input-cult-url" placeholder="https://..."></div>
+                    <div class="admin-field"><label>ADRESSE (GOOGLE MAPS VENLIG)</label><input type="text" id="input-cult-address" placeholder="Gade, område eller KL bydel"></div>
+                    <div class="admin-field"><label>DIN ANBEFALING (Hvorfor er det fedt?)</label><textarea id="input-cult-desc" style="height:70px;" placeholder="Skriv din korte anmeldelse her..."></textarea></div>
                     <div class="admin-field">
-                        <label>UPLOAD BILLEDE AF STEDET</label>
-                        <label for="input-cult-file" class="custom-file-upload"><span id="file-upload-status-text">Vælg billede</span></label>
+                        <label>BILLEDE (VALGFRIT)</label>
+                        <label for="input-cult-file" class="custom-file-upload" style="background-color:#1e293b;"><span id="file-upload-status-text">Vælg billede fra kamera/galleri</span></label>
                         <input type="file" id="input-cult-file" accept="image/*" style="display:none;" onchange="handleImageUploadConversion(this)">
                     </div>
-                    <button class="admin-save-btn" onclick="saveCultureData()">GEM ANBEFALING TIL SKYEN</button>
+                    <button class="admin-save-btn" style="background-color:#2dd4bf; color:#000;" onclick="saveCultureData()">SEND FORSLAG TIL GODKENDELSE</button>
                 </div>
             </div>
 
@@ -540,7 +580,7 @@
     </div>
 
     <script>
-        // --- 1. FIREBASE SETUP KONFIGURATION ---
+        // --- FIREBASE SETUP KONFIGURATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyDD6siBvW48upVQSEBUmjhiSU9w4t65fqY",
             authDomain: "badminton-tours.firebaseapp.com",
@@ -562,19 +602,20 @@
         let globalScheduleRawData = "";
         let isChatActivePage = false;
         let currentAuthMode = "LOGIN";
-        let lastMessageIdOnScreen = ""; // Gemmer det nyeste besked ID i databasen globalt
+        let lastMessageIdOnScreen = "";
+        let isRejseleder = false;
 
-        // --- 2. SECURITY & AUTH SYSTEM ---
+        // --- SECURITY & AUTH SYSTEM ---
         auth.onAuthStateChanged((user) => {
             if (user) {
                 document.getElementById('page-login').classList.remove('active');
                 document.getElementById('appTopbar').style.display = 'flex';
                 
                 if (user.email === "kasper@badmintontours.dk" || user.email === "kasper@badmintontours.com" || user.email.includes("leder") || user.email.includes("kasper")) {
+                    isRejseleder = true;
                     document.getElementById('adminLiveScoreTrigger').style.display = 'block';
                     document.getElementById('adminLogisticsTrigger').style.display = 'block';
                     document.getElementById('adminScheduleTrigger').style.display = 'block';
-                    document.getElementById('adminCultureTrigger').style.display = 'block';
                 }
                 
                 navigateTo('dashboard');
@@ -615,9 +656,7 @@
 
             auth.createUserWithEmailAndPassword(email, pass)
                 .then((userCredential) => {
-                    userCredential.user.updateProfile({
-                        displayName: name
-                    }).then(() => {
+                    userCredential.user.updateProfile({ displayName: name }).then(() => {
                         document.getElementById('welcomeModalText').innerHTML = `Velkommen på turen, <b>${name}</b>! Din profil er nu oprettet i skyen.`;
                         document.getElementById('welcomeModal').style.display = 'flex';
                     });
@@ -625,64 +664,29 @@
                 .catch(err => alert("Kunne ikke oprette profil: " + err.message));
         }
 
-        function closeWelcomeModal() {
-            document.getElementById('welcomeModal').style.display = 'none';
-            location.reload();
-        }
+        function closeWelcomeModal() { document.getElementById('welcomeModal').style.display = 'none'; location.reload(); }
+        function executeFirebaseLogin() { const email = document.getElementById('loginEmail').value.trim(); const pass = document.getElementById('loginPassword').value; if(!email || !pass) { alert("Udfyld venligst e-mail og adgangskode."); return; } auth.signInWithEmailAndPassword(email, pass).catch(err => alert("Fejl i login: " + err.message)); }
+        function toggleLogoutModal(show) { document.getElementById('logoutModal').style.display = show ? 'flex' : 'none'; }
+        function confirmFirebaseLogout() { toggleLogoutModal(false); auth.signOut().then(() => { location.reload(); }); }
+        function hideAllPagesAndShowLogin() { document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active')); document.getElementById('page-login').classList.add('active'); document.getElementById('appTopbar').style.display = 'none'; }
 
-        function executeFirebaseLogin() {
-            const email = document.getElementById('loginEmail').value.trim();
-            const pass = document.getElementById('loginPassword').value;
-            if(!email || !pass) { alert("Udfyld venligst e-mail og adgangskode."); return; }
-            
-            auth.signInWithEmailAndPassword(email, pass)
-                .catch(err => alert("Fejl i login: " + err.message));
-        }
-
-        function toggleLogoutModal(show) {
-            document.getElementById('logoutModal').style.display = show ? 'flex' : 'none';
-        }
-
-        function confirmFirebaseLogout() {
-            toggleLogoutModal(false);
-            auth.signOut().then(() => { location.reload(); });
-        }
-
-        function hideAllPagesAndShowLogin() {
-            document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-login').classList.add('active');
-            document.getElementById('appTopbar').style.display = 'none';
-        }
-
-        // --- 3. SKY-DATABASE REALTIDS ENGINE ---
+        // --- SKY-DATABASE ENGINE ---
         function startLiveDatabaseListeners() {
             database.ref('live_matches').on('value', (snapshot) => { renderDanishMatchesDisplay(snapshot.val() || ""); });
             database.ref('logistics').on('value', () => { renderLogisticsDisplay(); });
-            database.ref('master_schedule').on('value', (snapshot) => {
-                globalScheduleRawData = snapshot.val() || "";
-                renderScheduleDisplay(globalScheduleRawData);
-                updateDashboardNextActivity(globalScheduleRawData);
-            });
+            database.ref('master_schedule').on('value', (snapshot) => { globalScheduleRawData = snapshot.val() || ""; renderScheduleDisplay(globalScheduleRawData); updateDashboardNextActivity(globalScheduleRawData); });
             database.ref('chat_messages').limitToLast(50).on('value', (snapshot) => { renderChatMessages(snapshot.val()); });
             database.ref('culture_guide').on('value', (snapshot) => { renderCultureCards(snapshot.val()); });
         }
 
-        // --- 4. NAVIGATION (MED FAST TOPBAR FIX) ---
+        // --- NAVIGATION ENGINE ---
         function navigateTo(pageId) {
             if(!auth.currentUser && pageId !== 'login') return;
-            
-            // Hvis man går UD af chatten, gemmer vi ID'et på den absolut nyeste besked, der findes på skærmen lige nu
-            if (isChatActivePage && pageId !== 'chatPage' && lastMessageIdOnScreen) {
-                localStorage.setItem('chat_last_read_message_id', lastMessageIdOnScreen);
-            }
-
-            // Nulstil scroll position på hovedcontaineren så man ikke "arver" scroll fra andre sider
+            if (isChatActivePage && pageId !== 'chatPage' && lastMessageIdOnScreen) { localStorage.setItem('chat_last_read_message_id', lastMessageIdOnScreen); }
             document.getElementById('appContentContainer').scrollTop = 0;
-
             document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
             document.getElementById(`backBtn`).style.display = pageId === 'dashboard' ? 'none' : 'block';
             
-            // Skift synlighed mellem chatten (udenfor container) og de andre sider (indenfor container)
             if (pageId === 'chatPage') {
                 document.getElementById('appContentContainer').style.display = 'none';
                 document.getElementById('page-chatPage').classList.add('active');
@@ -690,38 +694,30 @@
                 document.getElementById('appContentContainer').style.display = 'block';
                 document.getElementById(`page-${pageId}`).classList.add('active');
             }
-            
             isChatActivePage = (pageId === 'chatPage');
             
             if (pageId === 'dashboard') { document.getElementById(`mainTitle`).innerHTML = "BADMINTON TOURS"; document.getElementById('chatBadge').style.display = 'none'; }
+            if (pageId === 'importantPage') document.getElementById(`mainTitle`).innerHTML = "10 VIGTIGSTE TING";
             if (pageId === 'logistics') document.getElementById(`mainTitle`).innerHTML = "MIN REJSE";
             if (pageId === 'schedulePage') document.getElementById(`mainTitle`).innerHTML = "DAGSPLAN";
             if (pageId === 'chatPage') {
-                document.getElementById('mainTitle').innerHTML = "GRUPPE-CHAT"; 
-                document.getElementById('chatBadge').style.display = 'none';
-                
-                // Hent og tegn beskederne, og kør vores smarte automatiske scroll-hop bagefter
+                document.getElementById('mainTitle').innerHTML = "GRUPPE-CHAT"; document.getElementById('chatBadge').style.display = 'none';
                 database.ref('chat_messages').limitToLast(50).once('value', (snapshot) => { 
                     renderChatMessages(snapshot.val()); 
-                    
-                    // KASPER-LOGIK: Hop direkte ned til vores røde linje ("Nye Beskeder") hvis den findes!
                     setTimeout(() => {
                         const unreadDividerElement = document.getElementById('unreadMarkerLine');
                         const box = document.getElementById('chatMessagesBox');
-                        if (unreadDividerElement) {
-                            unreadDividerElement.scrollIntoView({ block: 'start', behavior: 'auto' });
-                        } else {
-                            box.scrollTop = box.scrollHeight;
-                        }
+                        if (unreadDividerElement) unreadDividerElement.scrollIntoView({ block: 'start', behavior: 'auto' });
+                        else box.scrollTop = box.scrollHeight;
                     }, 50);
                 });
             }
             if (pageId === 'culturePage') document.getElementById(`mainTitle`).innerHTML = "KULTUR-GUIDE";
         }
 
-        // --- 5. PASSWORD SYSTEM TIL LEDERKONSOL ---
+        // --- LEDER ADGANGSKODE TJEK ---
         function checkAdminPassword(panelType) {
-            const ids = { logistics: 'adminPanelLogistics', schedule: 'adminPanelSchedule', culture: 'adminPanelCulture', livescore: 'adminPanelLivescore' };
+            const ids = { logistics: 'adminPanelLogistics', schedule: 'adminPanelSchedule', livescore: 'adminPanelLivescore' };
             const panel = document.getElementById(ids[panelType]); if (panel.style.display === 'block') { panel.style.display = 'none'; return; }
             if (prompt("Bekræft rejseleder adgangskode:") === "1234") {
                 panel.style.display = 'block';
@@ -731,7 +727,7 @@
             } else { alert("Adgang nægtet."); }
         }
 
-        // --- 6. DANSKE KAMPE ---
+        // --- DANSKE KAMPE LIVE ENGINE ---
         function saveLiveScoreData() { const txt = document.getElementById('input-raw-matches').value; database.ref('live_matches').set(txt).then(() => { alert("Kampprogram synkroniseret!"); document.getElementById('adminPanelLivescore').style.display = 'none'; }); }
         function renderDanishMatchesDisplay(rawText) {
             if(!rawText) { document.getElementById('danishMatchesAccordion').innerHTML = "<p style='color:#aaa; padding:10px; font-size:12px;'>Ingen planlagte kampe endnu.</p>"; return; }
@@ -754,13 +750,13 @@
             }
         }
 
-        // --- 7. FLY & LOGISTIK ---
+        // --- FLY & LOGISTIK ENGINE ---
         function switchUserGroup(g) { currentGroupView = g; renderLogisticsDisplay(); document.getElementById('btnGroupA').classList.toggle('active', g==='A'); document.getElementById('btnGroupB').classList.toggle('active', g==='B'); }
         function loadAdminFormGroup() { const g = document.getElementById('adminGroupSelect').value; database.ref(`logistics/${g}`).once('value', (s) => { const data = s.val() || {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { document.getElementById(`input-${f}`).value = data[f] || ''; }); }); }
         function saveLogisticsData() { const g = document.getElementById('adminGroupSelect').value; const updateObj = {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { updateObj[f] = document.getElementById(`input-${f}`).value; }); database.ref(`logistics/${g}`).set(updateObj).then(() => { alert("Flydata gemt!"); renderLogisticsDisplay(); }); }
         function renderLogisticsDisplay() { database.ref(`logistics/${currentGroupView}`).once('value', (s) => { const data = s.val() || {}; ['fly1-ud','fly2-ud','modetid','fly1-hjem','fly2-hjem','bagage','hotel'].forEach(f => { document.getElementById(`display-${f}`).innerHTML = data[f] || ''; }); }); }
 
-        // --- 8. MASTER DAGSPLAN ---
+        // --- MASTER PROGRAM ENGINE ---
         function saveScheduleData() { const txt = document.getElementById('input-raw-schedule').value; database.ref('master_schedule').set(txt).then(() => { alert("Master program opdateret globalt!"); document.getElementById('adminPanelSchedule').style.display = 'none'; }); }
         function renderScheduleDisplay(rawText) {
             if(!rawText) { document.getElementById('accordionContainer').innerHTML = "<p style='color:#aaa; text-align:center;'>Master-programmet er tomt lige nu.</p>"; return; }
@@ -777,7 +773,7 @@
             document.getElementById('accordionContainer').innerHTML = accordionHtml;
         }
 
-        // --- 9. NÆSTE AKTIVITET MOTOR ---
+        // --- NÆSTE AKTIVITET MOTOR ---
         function updateDashboardNextActivity(rawText) {
             if(!rawText) { resetNextActivity(); return; }
             const chunks = rawText.split('@').filter(c => c.trim() !== ""); if (chunks.length === 0) { resetNextActivity(); return; }
@@ -800,116 +796,143 @@
         }
         function resetNextActivity() { document.getElementById('dashboard-next-subtitle').innerHTML = "NÆSTE AKTIVITET"; document.getElementById('dashboard-next-title').innerHTML = "Ingen planlagte aktiviteter lige nu"; document.getElementById('dashboard-next-time').innerHTML = "Nyd fritiden! 🏸"; }
 
-        // --- 10. SKY CHAT ENGINE (SKUDSIKKER ID-BASERET METODE) ---
+        // --- GRUPPE-CHAT ENGINE ---
         function sendChatMessage() {
             const input = document.getElementById('chatInput'); const text = input.value.trim(); if (text === "") return;
             const currentUser = auth.currentUser;
-            
             let displaySender = currentUser.displayName || currentUser.email.split('@')[0];
             displaySender = displaySender.charAt(0).toUpperCase() + displaySender.slice(1);
-
-            database.ref('chat_messages').push({
-                sender: displaySender,
-                text: text,
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                likes: {}
-            });
+            database.ref('chat_messages').push({ sender: displaySender, text: text, timestamp: firebase.database.ServerValue.TIMESTAMP, likes: {} });
             input.value = "";
         }
 
         function renderChatMessages(data) {
             const box = document.getElementById('chatMessagesBox'); if(!data) { box.innerHTML = "<p style='color:#64748b; font-style:italic; text-align:center; padding:20px;'>Start samtalen! 🌴</p>"; return; }
-            let html = "";
-            const currentUser = auth.currentUser;
-            let myName = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "";
-            myName = myName.charAt(0).toUpperCase() + myName.slice(1);
-
-            // 100% RETTET KASPER LOGIK: Vi finder det gemte BESKED-ID i stedet for sekunder/tid!
+            let html = ""; const currentUser = auth.currentUser;
+            let myName = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : ""; myName = myName.charAt(0).toUpperCase() + myName.slice(1);
             const lastReadMessageId = localStorage.getItem('chat_last_read_message_id') || "";
-            let dividerInserted = false;
-            let foundOldLastReadMessage = false;
+            let dividerInserted = false; let foundOldLastReadMessage = false;
 
             if (!isChatActivePage && document.getElementById('page-dashboard').classList.contains('active')) {
                 document.getElementById('chatBadge').style.display = 'block'; document.getElementById('chatBadge').innerHTML = "Ny";
             }
-
             const messageKeys = Object.keys(data);
-            if (messageKeys.length > 0) {
-                // Vi holder øje med, hvad det absolut nyeste ID i databasen er lige nu
-                lastMessageIdOnScreen = messageKeys[messageKeys.length - 1];
-            }
+            if (messageKeys.length > 0) { lastMessageIdOnScreen = messageKeys[messageKeys.length - 1]; }
 
             messageKeys.forEach(key => {
                 const msg = data[key]; const isMe = (msg.sender === myName);
-                
-                // Hvis vi rammer en besked, der er NYERE end den besked, brugeren så sidst (og det ikke er deres egen)
                 if (foundOldLastReadMessage && !isMe && !dividerInserted && isChatActivePage && lastReadMessageId !== "") {
-                    html += `<div id="unreadMarkerLine" class="chat-unread-divider">NYE BESKEDER</div>`;
-                    dividerInserted = true;
+                    html += `<div id="unreadMarkerLine" class="chat-unread-divider">NYE BESKEDER</div>`; dividerInserted = true;
                 }
-
-                // Hvis vi møder den helt præcise besked, brugeren stoppede ved sidst, tænder vi for "triggeren"
-                if (key === lastReadMessageId) {
-                    foundOldLastReadMessage = true;
-                }
-
+                if (key === lastReadMessageId) { foundOldLastReadMessage = true; }
                 let likeArray = []; if(msg.likes) { Object.keys(msg.likes).forEach(lKey => { if(msg.likes[lKey]) likeArray.push(lKey); }); }
                 let likeText = ""; if (likeArray.length > 0) likeText = `<div class="like-row">❤️ Liket af ${likeArray.join(", ")}</div>`;
                 const iHaveLiked = likeArray.includes(myName);
-
                 html += `<div class="chat-bubble-wrapper ${isMe ? 'me' : 'other'}"><div class="chat-sender-name">${msg.sender}</div><div class="chat-bubble">${msg.text}<button class="like-trigger-btn ${iHaveLiked ? 'liked' : ''}" onclick="toggleLikeMessage('${key}', '${myName}', ${iHaveLiked})"><span class="material-icons" style="font-size:12px;">favorite</span></button></div>${likeText}</div>`;
             });
-            
-            box.innerHTML = html; 
-            
-            // Hvis man står aktivt inde på chatsiden, opdaterer vi løbende, så man har læst det hele til næste besøg
-            if (isChatActivePage && lastMessageIdOnScreen) {
-                localStorage.setItem('chat_last_read_message_id', lastMessageIdOnScreen);
-            }
-            
-            // Normal scroll i bunden hvis der ikke er nogen rød linje markeret
-            if (!dividerInserted && !isChatActivePage) {
-                setTimeout(() => { box.scrollTop = box.scrollHeight; }, 50);
-            }
+            box.innerHTML = html;
+            if (isChatActivePage && lastMessageIdOnScreen) { localStorage.setItem('chat_last_read_message_id', lastMessageIdOnScreen); }
+            if (!dividerInserted && !isChatActivePage) { setTimeout(() => { box.scrollTop = box.scrollHeight; }, 50); }
         }
         function toggleLikeMessage(msgId, myName, alreadyLiked) { if(alreadyLiked) { database.ref(`chat_messages/${msgId}/likes/${myName}`).remove(); } else { database.ref(`chat_messages/${msgId}/likes/${myName}`).set(true); } }
 
-        // --- 11. LIVE KULTUR-GUIDE ---
+        // --- KULTUR-GUIDE ENGINE MED REJSELEDER GODKENDELSE ---
         function switchCultureTab(t) { activeCultureTab = t; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.getElementById(`tab-${t}`).classList.add('active'); database.ref('culture_guide').once('value', s => renderCultureCards(s.val())); }
         function handleImageUploadConversion(i) { const f = i.files[0]; if (!f) return; const r = new FileReader(); r.onload = function(e) { base64UploadedImageString = e.target.result; document.getElementById('file-upload-status-text').innerHTML = "✅ Billede klar!"; document.getElementById('file-upload-status-text').style.color = "#2dd4bf"; }; r.readAsDataURL(f); }
+        
         function saveCultureData() {
             const cat = document.getElementById('input-cult-category').value; const name = document.getElementById('input-cult-name').value.trim(); const url = document.getElementById('input-cult-url').value.trim(); const addr = document.getElementById('input-cult-address').value.trim(); const desc = document.getElementById('input-cult-desc').value.trim();
             if(name === "" || addr === "") { alert("Navn og adresse skal udfyldes!"); return; }
             let finalImage = base64UploadedImageString; if(finalImage === "") finalImage = "https://images.unsplash.com/photo-1596422846543-75c6fc18a523?auto=format&fit=crop&q=80&w=350&h=140";
-            database.ref('culture_guide').push({ category: cat, name: name, url: url, address: addr, desc: desc, img: finalImage }).then(() => { alert("Anbefaling sendt op!"); document.getElementById('input-cult-name').value = ""; document.getElementById('input-cult-url').value = ""; document.getElementById('input-cult-address').value = ""; document.getElementById('input-cult-desc').value = ""; document.getElementById('input-cult-file').value = ""; document.getElementById('file-upload-status-text').innerHTML = "Vælg billede"; document.getElementById('file-upload-status-text').style.color = "#94a3b8"; base64UploadedImageString = ""; document.getElementById('adminPanelCulture').style.display = 'none'; switchCultureTab(cat); });
-        }
-        function renderCultureCards(data) {
-            const container = document.getElementById('cultureCardsContainer');
-            if(!data) {
-                const standardCulture = [
-                    { category: "MAD", name: "Jalan Alor Food Street", url: "https://www.kuala-lumpur.ws/magazine/jalan-alor.htm", address: "Jalan Alor, Bukit Bintang, Kuala Lumpur", desc: "KL's vildeste madgade! Når mørket falder på, forvandles gaden til et mekka af gademad. Prøv satay-spyd og grillet rokke!", img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&q=80&w=350&h=140" },
-                    { category: "SHOPPING", name: "Pavilion Kuala Lumpur", url: "https://www.pavilion-kl.com/", address: "168, Jalan Bukit Bintang, Kuala Lumpur", desc: "Et enormt luksus-shoppingcenter lige i hjertet av Bukit Bintang. Her findes alt fra gigantiske sportsbutikker med badmintonudstyr til store madmarkeder i kælderen.", img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=350&h=140" },
-                    { category: "SIGHTSEEING", name: "Batu Caves 🐒", url: "https://www.malaysia.travel/explore/batu-caves", address: "Batu Caves, Selangor, Kuala Lumpur", desc: "Det ikoniske hinduistiske tempel bygget inde i en gigantisk kalkstensgrotte. Man skal gå de 272 farvestrålende trappetrin op.", img: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&q=80&w=350&h=140" }
-                ];
-                standardCulture.forEach(sc => database.ref('culture_guide').push(sc)); return;
-            }
-            let html = "";
-            Object.keys(data).forEach(key => {
-                const place = data[key]; if(place.category !== activeCultureTab) return;
-                const webLink = place.url ? `href="${place.url}" target="_blank"` : `href="#" onclick="alert('Ingen hjemmeside'); return false;"`;
-                const mapsLink = `href="http://googleusercontent.com/maps.google.com/3{encodeURIComponent(place.address)}" target="_blank"`;
-                html += `<div class="culture-card"><div class="culture-card-img" style="background-image: url('${place.img}')"></div><div class="culture-card-body"><a ${webLink} class="culture-name-link">${place.name} <span class="material-icons" style="font-size:14px; color:#2dd4bf;">open_in_new</span></a><a ${mapsLink} class="culture-maps-link"><span class="material-icons" style="font-size:14px;">near_me</span> Rutevejledning</a><div class="culture-desc">${place.desc}</div></div></div>`;
+            
+            const senderName = auth.currentUser.displayName || "Deltager";
+
+            // SÅDAN KASPER: Alle forslag gemmes med 'approved: false'. Det lander i din kø!
+            database.ref('culture_guide').push({
+                category: cat, name: name, url: url, address: addr, desc: desc, img: finalImage,
+                approved: false, submittedBy: senderName
+            }).then(() => {
+                alert("Mange tak for tippet! Dit forslag er sendt til Kasper til godkendelse.");
+                document.getElementById('input-cult-name').value = ""; document.getElementById('input-cult-url').value = ""; document.getElementById('input-cult-address').value = ""; document.getElementById('input-cult-desc').value = ""; base64UploadedImageString = ""; document.getElementById('file-upload-status-text').innerHTML = "Vælg billede fra kamera/galleri"; document.getElementById('file-upload-status-text').style.color = "#94a3b8";
             });
-            container.innerHTML = html || `<p style="color:#94a3b8; font-style:italic; text-align:center; padding: 20px 0;">Tom kategori... 🌴</p>`;
         }
 
-        // --- 12. VEJR ENGINE ---
+        // REJSELEDER METODER TIL AT STYRE KØEN
+        function approvePlace(key) {
+            database.ref(`culture_guide/${key}`).update({ approved: true }).then(() => { alert("Stedet er godkendt og lagt live i guiden!"); });
+        }
+        function deletePlace(key) {
+            if(confirm("Vil du slette dette forslag permanent?")) { database.ref(`culture_guide/${key}`).remove(); }
+        }
+
+        function renderCultureCards(data) {
+            const container = document.getElementById('cultureCardsContainer');
+            const approvalSection = document.getElementById('adminApprovalSection');
+            const approvalContainer = document.getElementById('adminApprovalCardsContainer');
+            const dashboardBadge = document.getElementById('approvalBadge');
+            
+            if(!data) return;
+            
+            let mainHtml = ""; let approvalHtml = ""; let pendingCount = 0;
+            
+            Object.keys(data).forEach(key => {
+                const place = data[key];
+                
+                // HVIS DET ER UGODKENDT -> Sorter til rejselederens kø
+                if (place.approved === false) {
+                    pendingCount++;
+                    if (isRejseleder) {
+                        approvalHtml += `<div class="admin-approval-card">
+                            <div style="font-size:11px; color:#ef4444; font-weight:bold; margin-bottom:4px;">INDSENDT AF: ${place.submittedBy || 'Deltager'} (${place.category})</div>
+                            <h4 style="font-size:16px; margin-bottom:2px;">${place.name}</h4>
+                            <p style="font-size:12px; color:#aaa; margin-bottom:4px;">📍 ${place.address}</p>
+                            <p style="font-size:13px; margin-bottom:12px; font-style:italic;">"${place.desc}"</p>
+                            <div style="display:flex; gap:8px;">
+                                <button onclick="approvePlace('${key}')" style="flex:1; padding:8px; background-color:#10b981; color:white; border:none; border-radius:6px; font-weight:bold; font-size:12px; cursor:pointer;">🟢 GODKEND & UDGIV</button>
+                                <button onclick="deletePlace('${key}')" style="padding:8px; background-color:#ef4444; color:white; border:none; border-radius:6px; font-weight:bold; font-size:12px; cursor:pointer;">🔴 SLET</button>
+                            </div>
+                        </div>`;
+                    }
+                } 
+                // HVIS DET ER GODKENDT -> Vis i den rigtige guide
+                else if (place.category === activeCultureTab) {
+                    const webLink = place.url ? `href="${place.url}" target="_blank"` : `href="#" onclick="alert('Ingen hjemmeside registreret'); return false;"`;
+                    const mapsLink = `href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" target="_blank"`;
+                    const submittedTag = place.submittedBy ? `<div class="culture-submitted-by">Tip fra: ${place.submittedBy} ✨</div>` : '';
+                    
+                    mainHtml += `<div class="culture-card">
+                        <div class="culture-card-img" style="background-image: url('${place.img}')"></div>
+                        <div class="culture-card-body">
+                            <a ${webLink} class="culture-name-link">${place.name} <span class="material-icons" style="font-size:14px; color:#2dd4bf;">open_in_new</span></a>
+                            <a ${mapsLink} class="culture-maps-link"><span class="material-icons" style="font-size:14px;">near_me</span> Vis på kort</a>
+                            <div class="culture-desc">${place.desc}</div>
+                            ${submittedTag}
+                        </div>
+                    </div>`;
+                }
+            });
+            
+            // Håndter Rejseleder-visning af køen
+            if (isRejseleder && pendingCount > 0) {
+                approvalSection.style.display = 'block';
+                approvalContainer.innerHTML = approvalHtml;
+                dashboardBadge.style.display = 'inline-block';
+                dashboardBadge.innerHTML = pendingCount;
+            } else {
+                approvalSection.style.display = 'none';
+                dashboardBadge.style.display = 'none';
+            }
+            
+            container.innerHTML = mainHtml || `<p style="color:#94a3b8; font-style:italic; text-align:center; padding: 20px 0;">Tom kategori... 🌴</p>`;
+        }
+
+        // --- VEJR ENGINE ---
         function toggleWeather(show) { document.getElementById('weatherModal').style.display = show ? 'flex' : 'none'; }
         async function fetchRealWeather() {
             const url = "https://api.open-meteo.com/v1/forecast?latitude=3.1412&longitude=101.6865&current=temperature_2m,weather_code&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max&timezone=Asia%2FKuala_Lumpur";
             try {
                 const response = await fetch(url); const data = await response.json();
-                document.getElementById('currentWeatherText').innerHTML = `Kuala Lumpur • ${Math.round(data.current.temperature_2m)}°C ☀️`;
+                document.getElementById('currentWeatherText').innerHTML = `KL • ${Math.round(data.current.temperature_2m)}°C ☀️`;
                 const ugedage = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"]; let htmlBlocks = "";
                 for(let i = 0; i < 5; i++) {
                     const d = new Date(); d.setDate(d.getDate() + i); const code = data.daily.weather_code[i];
